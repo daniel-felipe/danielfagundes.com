@@ -1,0 +1,42 @@
+---
+interface Props {
+	variant?: 'primary' | 'secondary';
+	size?: 'small' | 'large';
+	fullWidth?: boolean;
+	href?: string;
+	external?: boolean;
+	type?: 'button' | 'submit' | 'reset';
+	disabled?: boolean;
+	class?: string;
+}
+
+const {
+	variant = 'primary',
+	size,
+	fullWidth = false,
+	href,
+	external = false,
+	type = 'button',
+	disabled = false,
+	class: className,
+} = Astro.props;
+
+const classes = [`button-${variant}`, size, fullWidth && 'full-width', className];
+---
+
+{
+	href ? (
+		<a
+			class:list={classes}
+			href={href}
+			target={external ? '_blank' : undefined}
+			rel={external ? 'noopener noreferrer' : undefined}
+		>
+			<slot />
+		</a>
+	) : (
+		<button class:list={classes} type={type} disabled={disabled || undefined}>
+			<slot />
+		</button>
+	)
+}
