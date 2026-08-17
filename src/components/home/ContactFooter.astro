@@ -1,0 +1,45 @@
+---
+import Button from '../Button.astro';
+import { channels, site } from '../../data/home';
+---
+
+<footer class="main-section close" id="contato">
+	<div class="container stack">
+		<div class="row tight fade-up">
+			<div class="square-tag pulsing"></div>
+			<span class="section-index">Tem uma ideia?</span>
+		</div>
+		<h2 class="close-title">
+			<span class="perspective"><span class="perspective-load">Vamos construir</span></span>
+			<span class="perspective"><span class="perspective-load close-title-soft">isso juntos.</span></span>
+		</h2>
+		<p class="section-lead fade-up">
+			Me conte o que você precisa. Eu respondo com um diagnóstico honesto, inclusive se a resposta for que você não precisa de um desenvolvedor.
+		</p>
+		<div class="row close-actions fade-up">
+			<Button href={`mailto:${site.email}`}>Enviar mensagem</Button>
+		</div>
+		<nav class="row close-channels fade-up" aria-label="Canais">
+			{
+				channels.map((channel) => (
+					<a
+						class="text-link-social"
+						href={channel.href}
+						target={channel.external ? '_blank' : undefined}
+						rel={channel.external ? 'noopener noreferrer' : undefined}
+					>
+						[ {channel.label} ]
+					</a>
+				))
+			}
+		</nav>
+		<div class="horizontal-line line-draw"></div>
+		<div class="row close-foot fade-up">
+			<div class="row tight">
+				<div class="square-tag"></div>
+				<span class="section-index">Daniel Fagundes</span>
+			</div>
+			<a class="link" href="#topo">Voltar ao topo<span class="link-underline"></span></a>
+		</div>
+	</div>
+</footer>

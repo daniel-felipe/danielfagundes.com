@@ -1,0 +1,22 @@
+---
+import { faqItems } from '../../data/home';
+import SectionHeading from './SectionHeading.astro';
+---
+
+<section class="main-section" id="faq">
+	<div class="container stack">
+		<div class="section-head">
+			<SectionHeading index="04" title="FAQ" />
+		</div>
+		<dl class="faq-list">
+			{
+				faqItems.map((item) => (
+					<div class="faq-item fade-up">
+						<dt>{item.question}</dt>
+						<dd>{item.answer}</dd>
+					</div>
+				))
+			}
+		</dl>
+	</div>
+</section>

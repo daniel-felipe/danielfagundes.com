@@ -1,0 +1,29 @@
+---
+import type { Service } from '../../data/home';
+
+interface Props {
+	service: Service;
+	index: string;
+}
+
+const { service, index } = Astro.props;
+const open = Boolean(service.open);
+---
+
+<div class:list={['service-item', 'fade-up', { 'is-open': open }]}>
+	<button class="service-row" type="button" aria-expanded={open ? 'true' : 'false'}>
+		<span class="service-no">{index}</span>
+		<h3 class="service-title">{service.title}</h3>
+		<span class="service-state">{open ? '( Fechar )' : '( Ver )'}</span>
+	</button>
+	<div class="service-panel">
+		<div>
+			<div class="service-panel-inner">
+				<p>{service.body}</p>
+				<div class="row tight">
+					{service.tags.map((tag) => <span class="tag-service">{tag}</span>)}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

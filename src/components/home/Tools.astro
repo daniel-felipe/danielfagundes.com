@@ -1,0 +1,28 @@
+---
+import { toolGroups } from '../../data/home';
+import SectionHeading from './SectionHeading.astro';
+---
+
+<section class="main-section" id="ferramentas">
+	<div class="container stack">
+		<div class="section-head">
+			<SectionHeading index="03" title="Ferramentas que uso" />
+		</div>
+		<div class="grid cols-3">
+			{
+				toolGroups.map((group) => (
+					<div class="card outline padded scale-in stack tight">
+						<div class="spec">
+							<span class="spec-label">{group.label}</span>
+						</div>
+						<div class="row tight">
+							{group.tags.map((tag) => (
+								<span class="tag-service">{tag}</span>
+							))}
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

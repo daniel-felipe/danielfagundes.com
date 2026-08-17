@@ -1,0 +1,23 @@
+---
+import type { Project } from '../../data/home';
+import ArrowIcon from '../icons/ArrowIcon.astro';
+
+interface Props {
+	project: Project;
+	index: string;
+}
+
+const { project, index } = Astro.props;
+---
+
+<li class="work-item fade-up">
+	<a class="work-link" href={project.href} target="_blank" rel="noopener noreferrer">
+		<span class="service-no">{index}</span>
+		<h3 class="work-title">
+			{project.title}
+			<ArrowIcon class="work-arrow" />
+		</h3>
+		<span class="tag-company">{project.tag}</span>
+		<p class="work-lead">{project.lead}</p>
+	</a>
+</li>

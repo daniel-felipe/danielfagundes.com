@@ -1,0 +1,16 @@
+---
+import { projects, sectionIndex } from '../../data/home';
+import ProjectItem from './ProjectItem.astro';
+import SectionHeading from './SectionHeading.astro';
+---
+
+<section class="main-section" id="projetos">
+	<div class="container stack">
+		<div class="section-head">
+			<SectionHeading index="01" title="Trabalhos recentes" />
+		</div>
+		<ul class="work-list">
+			{projects.map((project, i) => <ProjectItem project={project} index={sectionIndex(i)} />)}
+		</ul>
+	</div>
+</section>

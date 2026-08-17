@@ -1,0 +1,15 @@
+---
+import { marqueeItems } from '../../data/home';
+---
+
+<section class="marquee" aria-hidden="true">
+	{
+		[0, 1].map(() => (
+			<div class="marquee-track">
+				{marqueeItems.map((item) => (
+					<h2 class:list={['marquee-text', { outline: item.outline }]}>{item.label}</h2>
+				))}
+			</div>
+		))
+	}
+</section>

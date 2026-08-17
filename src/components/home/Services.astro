@@ -1,0 +1,17 @@
+---
+import { sectionIndex, services } from '../../data/home';
+import SectionHeading from './SectionHeading.astro';
+import ServiceItem from './ServiceItem.astro';
+---
+
+<section class="main-section tight" id="servicos">
+	<div class="container stack">
+		<div class="section-head">
+			<SectionHeading index="02" title="Serviços" />
+			<p class="section-lead fade-up">O que eu faço, na prática:</p>
+		</div>
+		<div class="stack tight">
+			{services.map((service, i) => <ServiceItem service={service} index={sectionIndex(i)} />)}
+		</div>
+	</div>
+</section>
