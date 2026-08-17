@@ -1,11 +1,32 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Navbar from '../components/home/Navbar.astro';
+import Hero from '../components/home/Hero.astro';
+import Marquee from '../components/home/Marquee.astro';
+import Projects from '../components/home/Projects.astro';
+import Services from '../components/home/Services.astro';
+import Tools from '../components/home/Tools.astro';
+import Faq from '../components/home/Faq.astro';
+import ContactFooter from '../components/home/ContactFooter.astro';
+import CustomCursor from '../components/home/CustomCursor.astro';
+import { site } from '../data/home';
+import '../styles/pages/home.css';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title={site.title} description={site.description}>
+	<Navbar />
+	<Hero />
+	<Marquee />
+	<Projects />
+	<Services />
+	<Tools />
+	<Faq />
+	<ContactFooter />
+	<CustomCursor />
 </Layout>
+
+<script>
+	import { initHome } from '../scripts/home/page';
+
+	initHome();
+</script>
