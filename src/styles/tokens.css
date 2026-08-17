@@ -1,0 +1,199 @@
+/* Design tokens */
+/* Design tokens merged from the three source projects.
+   Kitpro Dario contributes the fluid vw scale + dark surfaces,
+   Az Artful the Manrope display ramp, You X the neutral/accent ramp.
+
+   Two layers live here. The raw palette below names every colour the
+   sources ship. The semantic layer further down is the only one the
+   components read, so a theme swap never touches a component rule. */
+:root {
+  /* raw surfaces — Kitpro Dario */
+  --color-black: #000;
+  --color-bg-section: #0c0c0c;
+  --color-surface-1: #131313;
+  --color-surface-2: #181818;
+  --color-surface-3: #1d1d1d;
+  --color-dark-gray: #292929;
+  --color-gray: #c2c2c2;
+  --color-white: #fff;
+  --color-off-white: #fafafa;
+
+  /* raw neutrals — You X */
+  --neutral-100: #fff;
+  --neutral-200: #f6f7ff;
+  --neutral-300: #eff0f6;
+  --neutral-400: #d9dbe9;
+  --neutral-500: #b2b4c4;
+  --neutral-600: #777990;
+  --neutral-700: #4e4b66;
+  --neutral-800: #14142b;
+
+  /* raw accents. None of the three sources declares a saturated primary:
+     Kitpro's whole token set is #000/#0c0c0c/#292929/#c2c2c2/#fff, Az
+     Artful has no tokens at all, and You X's only chroma is four tints
+     that are effectively off-whites. What reads as "accent" in all three
+     is value contrast, not hue.
+
+     So the primary is the chromatic edge of You X's own ramp rather than
+     a new colour: that ramp is already blue-cast (#14142b through
+     #b2b4c4 all sit near hue 235), and pushing it slightly is enough to
+     signal state without breaking the monochrome. The two variants exist
+     because a single slate cannot clear 4.5:1 on both shells. */
+  --accent-slate: #5a5e8a;
+  --accent-slate-bright: #a3a8d0;
+  --secondary-ice: #ebf8ff;
+  --secondary-sand: #fff5d2;
+  --secondary-sky: #f3fbff;
+  --secondary-lilac: #f3eeff;
+
+  /* families */
+  --font-display: Manrope, sans-serif;
+  --font-text: "Open Sans", sans-serif;
+  --font-ui: Satoshi, "DM Sans", sans-serif;
+  --font-mono: "DM Sans", ui-monospace, monospace;
+
+  /* weights */
+  --weight-200: 200;
+  --weight-300: 300;
+  --weight-400: 400;
+  --weight-500: 500;
+  --weight-600: 600;
+  --weight-700: 700;
+  --weight-800: 800;
+
+  /* fluid display ramp — Kitpro Dario, floored so 8vw of a
+     375px phone cannot collapse a heading to 30px. */
+  --size-xl: max(3.25rem, 8vw);
+  --height-xl: max(3rem, 7vw);
+  --size-l: max(2.75rem, 7vw);
+  --height-l: max(2.55rem, 6.5vw);
+  --size-m: max(1.85rem, 4vw);
+  --height-m: max(2.1rem, 4.5vw);
+  --size-ms: max(1.6rem, 3.25vw);
+  --height-ms: max(1.85rem, 3.8vw);
+  --size-s: max(0.95rem, 1.4vw);
+  --height-s: max(1.4rem, 2.1vw);
+  --size-xs: max(0.85rem, 1.05vw);
+  --height-xs: max(1.25rem, 1.75vw);
+  --size-xxs: max(0.8rem, .9vw);
+  --height-xxs: max(1.2rem, 1.6vw);
+
+  /* heading ramp — Kitpro Dario */
+  --size-h1: max(2.75rem, 6vw);
+  --height-h1: max(2.6rem, 5.7vw);
+  --size-h2: max(2.05rem, 4.5vw);
+  --height-h2: max(2.3rem, 9vw);
+  --size-h3: max(1.6rem, 3.2vw);
+  --height-h3: max(1.85rem, 6vw);
+  --size-h4: max(1.35rem, 2.4vw);
+  --height-h4: max(1.65rem, 4vw);
+  --size-h5: max(1.15rem, 1.8vw);
+  --height-h5: max(1.45rem, 3vw);
+  --size-h6: max(1.05rem, 1.35vw);
+  --height-h6: max(1.4rem, 3vw);
+
+  /* fixed ramp — You X, for UI copy that must not scale with viewport */
+  --ui-display-1: 72px;
+  --ui-display-2: 56px;
+  --ui-display-3: 42px;
+  --ui-display-4: 28px;
+  --ui-body-l: 22px;
+  --ui-body: 18px;
+  --ui-body-s: 15px;
+
+  /* spacing — Kitpro Dario, floored for touch layouts */
+  --gap-button: max(0.25rem, .3vw);
+  --gap-xxs: max(0.5rem, .6vw);
+  --gap-xs: max(0.85rem, 1.5vw);
+  --gap-s: max(1.15rem, 2.4vw);
+  --gap-ml: max(1.75rem, 4vw);
+  --gap-xl: max(2.5rem, 6vw);
+  --padding-section-sm: max(0.75rem, 1vw);
+  --padding-section-md: max(1.25rem, 2vw);
+  --padding-section-lg: max(4rem, 8vw);
+  --padding-container: max(1.5rem, 2vw);
+  --padding-container-lg: max(2.5rem, 10vw);
+
+  /* radius */
+  --radius-sm: max(4px, .25vw);
+  --radius-md: max(8px, .5vw);
+  --radius-card: 20px;
+  --radius-pill: 999vw;
+
+  /* elevation — You X */
+  --shadow-sm: 0 2px 8px #14142b12;
+  --shadow-md: 0 2px 12px #14142b14;
+  --shadow-lg: 0 4px 20px -5px #14142b26;
+
+  /* motion */
+  --ease-out-expo: cubic-bezier(.16, 1, .3, 1);
+  --ease-brix: cubic-bezier(.4, 0, .2, 1);
+  --duration-fast: .3s;
+  --duration-base: .6s;
+  --duration-slow: .8s;
+
+  /* component metrics — Kitpro Dario */
+  --width-card-work: 27vw;
+  --height-card-work: 34vw;
+  --width-card-career: 28vw;
+  --height-card-career: 24vw;
+  --size-image-service: 5vw;
+}
+
+/* Semantic layer — dark is the shell the three sources were rebuilt into,
+   so it is the default and also the fallback when no theme is resolved. */
+:root,
+[data-theme="dark"] {
+  --bg: var(--color-bg-section);
+  --bg-elevated: #0c0c0ccc;
+  --surface-1: var(--color-surface-1);
+  --surface-2: var(--color-surface-2);
+  --surface-3: var(--color-dark-gray);
+  --border: var(--color-dark-gray);
+
+  --text: var(--color-gray);
+  --text-strong: var(--color-white);
+  --text-muted: var(--neutral-600);
+
+  --accent: var(--accent-slate-bright);
+  --accent-ink: var(--color-bg-section);
+
+  /* "Paper" is the white card the You X components are drawn on. It stays
+     light in both themes: the contrast against the dark shell is the
+     point of that component. */
+  --paper: var(--neutral-100);
+  --paper-border: #0000;
+  --paper-text: var(--neutral-600);
+  --paper-text-strong: var(--neutral-800);
+
+  --cursor-strong: #dadadacc;
+  --cursor-soft: #dadada33;
+  --swatch-border: #ffffff1a;
+  --mark-invert: 1;
+}
+
+[data-theme="light"] {
+  --bg: var(--neutral-200);
+  --bg-elevated: #f6f7ffcc;
+  --surface-1: var(--neutral-300);
+  --surface-2: var(--neutral-100);
+  --surface-3: var(--neutral-100);
+  --border: var(--neutral-400);
+
+  --text: var(--neutral-700);
+  --text-strong: var(--neutral-800);
+  --text-muted: var(--neutral-600);
+
+  --accent: var(--accent-slate);
+  --accent-ink: var(--neutral-100);
+
+  --paper: var(--neutral-100);
+  --paper-border: var(--neutral-400);
+  --paper-text: var(--neutral-600);
+  --paper-text-strong: var(--neutral-800);
+
+  --cursor-strong: #14142b8c;
+  --cursor-soft: #14142b33;
+  --swatch-border: #14142b1f;
+  --mark-invert: 0;
+}

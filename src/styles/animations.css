@@ -1,0 +1,139 @@
+/* Animations */
+/* Keyframes, scroll-reveal states and the transition rules taken from
+   the inline <style> blocks of Kitpro Dario and You X. The 3D title
+   park (rotateX + z) is the Az Artful page-load, kept as CSS so the
+   same class works with or without GSAP. */
+
+@keyframes marquee-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-100%, 0, 0); }
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .35; transform: scale(.6); }
+}
+
+/* Kitpro pre-hides every animated block so GSAP can play the intro
+   without a flash of the final state. Here it is scoped to the
+   reveal helper instead of the original 90-selector list. */
+html.w-mod-js:not(.w-mod-ix3) .pre-hide { visibility: hidden !important; }
+
+/* Every parked "before" state is gated on .w-mod-js, so a visitor without
+   JavaScript gets the finished layout instead of an empty page. */
+.perspective {
+  overflow: hidden;
+  perspective: 400px;
+  perspective-origin: 50% 100%;
+  transform-origin: 50% 100%;
+}
+
+html.w-mod-js .perspective-load {
+  display: block;
+  transform-origin: 50% 100%;
+  transform: translate3d(0, 60%, -3vw) rotateX(-100deg);
+  opacity: 0;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+  transition: transform var(--duration-slow) var(--ease-out-expo), opacity var(--duration-slow) var(--ease-out-expo);
+}
+
+html.w-mod-js .fade-up {
+  transform: translate3d(0, 20px, 0);
+  opacity: 0;
+  transition: transform 1s var(--ease-out-expo), opacity 1.2s var(--ease-out-expo);
+}
+
+html.w-mod-js .fade-in { opacity: 0; transition: opacity 1.2s var(--ease-out-expo); }
+
+html.w-mod-js .scale-in {
+  transform: scale3d(.86, .86, 1);
+  opacity: 0;
+  transition: transform .6s var(--ease-out-expo), opacity .6s var(--ease-out-expo);
+}
+
+html.w-mod-js .line-draw {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--duration-slow) var(--ease-out-expo);
+}
+
+html.w-mod-js .perspective-load.is-revealed {
+  transform: translate3d(0, 0, 0) rotateX(0deg);
+  opacity: 1;
+  will-change: auto;
+}
+
+.perspective:has(> .is-revealed) { overflow: visible; }
+
+html.w-mod-js .fade-up.is-revealed { transform: translate3d(0, 0, 0); opacity: 1; }
+html.w-mod-js .fade-in.is-revealed { opacity: 1; }
+html.w-mod-js .scale-in.is-revealed { transform: scale3d(1, 1, 1); opacity: 1; }
+html.w-mod-js .line-draw.is-revealed { clip-path: inset(0 0 0 0); }
+
+.rotating { animation: rotate-slow 18s linear infinite; }
+.pulsing { animation: pulse-dot 1.8s var(--ease-brix) infinite; }
+
+.navbar {
+  transition: transform .5s ease, background-color var(--duration-fast) var(--ease-brix);
+}
+
+.navbar.is-away { transform: translate3d(0, -100%, 0); }
+
+.marquee.is-paused .marquee-track { animation-play-state: paused; }
+
+/* You X rotates a stack of promo chips: the active one sits flat and
+   the next one peeks from underneath, slightly smaller and faded. */
+/* The chips are stacked on top of each other, so the rail needs its own
+   height: every card in the stack is out of flow. */
+.badge-stack { position: relative; height: 56px; }
+
+.more-templates-badge-wrapper {
+  position: absolute;
+  inset: auto auto 0 0;
+  opacity: 0;
+  transform: translateY(11px) scale(.9);
+  transition: all var(--duration-slow) var(--ease-brix);
+}
+
+.more-templates-badge-wrapper.active { opacity: 1; transform: translateY(0) scale(1); z-index: 9991; }
+.more-templates-badge-wrapper.next { opacity: .4; transform: translateY(11px) scale(.9); z-index: 9990; }
+.more-templates-badge-wrapper.active:hover { transform: translateY(-3px) scale(1.02) translateX(-3px) rotate(1deg); }
+
+/* You X only paints the background-video poster when the visitor has
+   asked the system to reduce motion. */
+[data-wf-bgvideo-fallback-img] { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-wf-bgvideo-fallback-img] {
+    position: absolute;
+    z-index: -100;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .marquee-track,
+  .rotating,
+  .pulsing { animation: none; }
+
+  .navbar,
+  .navbar.is-away { transform: none; transition: none; }
+
+  html.w-mod-js .perspective-load,
+  html.w-mod-js .fade-up,
+  html.w-mod-js .fade-in,
+  html.w-mod-js .scale-in,
+  html.w-mod-js .line-draw {
+    transform: none;
+    opacity: 1;
+    clip-path: none;
+    transition: none;
+    will-change: auto;
+  }
+}

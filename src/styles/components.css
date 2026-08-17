@@ -1,0 +1,725 @@
+/* Components */
+/* Component library. Button/input/card geometry comes from You X,
+   the tag, sticky-button and career/work cards from Kitpro Dario,
+   the underline link and project item from Az Artful. */
+
+/* ---------- navbar ---------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap-s);
+  padding: max(var(--padding-section-sm), env(safe-area-inset-top)) max(var(--padding-container), env(safe-area-inset-right)) var(--padding-section-sm) max(var(--padding-container), env(safe-area-inset-left));
+  background-color: var(--bg-elevated);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Optional inner container keeps the bar aligned with page content
+   without changing the full-bleed shell the system page uses. */
+.navbar > .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap-s);
+  min-width: 0;
+  width: 100%;
+}
+
+.navbar > .container .brand,
+.navbar > .container .row { flex-shrink: 0; }
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xxs);
+  font-family: var(--font-display);
+  font-size: var(--ui-body);
+  font-weight: var(--weight-800);
+  letter-spacing: -.02em;
+  color: var(--text-strong);
+}
+
+.nav-menu { display: flex; align-items: center; gap: var(--gap-xs); min-width: 0; }
+
+/* Kitpro swaps a duplicated label upward on hover. */
+.nav-link {
+  position: relative;
+  display: block;
+  height: 1.6em;
+  overflow: hidden;
+  font-family: var(--font-ui);
+  font-size: var(--ui-body-s);
+  font-weight: var(--weight-500);
+  /* The mask height, the label height and the hover travel are all one
+     line, so they must resolve to the same number. */
+  line-height: 1.6em;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.nav-link-text { display: block; transition: transform var(--duration-fast) var(--ease-out-expo); }
+
+/* The duplicate is parked one line below the mask so the pair travels as a
+   unit: the static label exits the top as the accent copy takes its place.
+   Kitpro parks it with GSAP at init; here the offset is declarative. */
+.nav-link-text.absolute { position: absolute; inset: 100% auto auto 0; width: 100%; color: var(--text-strong); }
+@media (hover: hover) and (pointer: fine) {
+  .nav-link:hover .nav-link-text { transform: translateY(-100%); }
+}
+.nav-link[aria-current="true"] { color: var(--text-strong); }
+.nav-link[aria-current="true"] .nav-link-text.absolute { color: var(--accent); }
+
+/* Theme switch. Both glyphs are always in the DOM and the active theme
+   decides which one is painted, so the control never reflows. */
+.theme-toggle {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background-color: var(--surface-1);
+  color: var(--text-strong);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color var(--duration-fast) var(--ease-out-expo), color var(--duration-fast) var(--ease-out-expo), border-color var(--duration-fast) var(--ease-out-expo);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+}
+.theme-toggle svg { width: 17px; height: 17px; }
+.theme-toggle .icon-sun { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+/* ---------- links ---------- */
+.link {
+  position: relative;
+  display: inline-flex;
+  padding-bottom: 5px;
+  overflow: hidden;
+  color: inherit;
+}
+
+.link-underline {
+  position: absolute;
+  inset: auto auto 0 0;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  transform: translate3d(-102%, 0, 0);
+  transition: transform var(--duration-fast) var(--ease-out-expo);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link:hover .link-underline { transform: translate3d(0, 0, 0); }
+}
+
+.link:focus-visible .link-underline { transform: translate3d(0, 0, 0); }
+
+.text-link-social {
+  font-family: var(--font-ui);
+  font-size: var(--ui-body-s);
+  letter-spacing: .04em;
+  color: var(--text);
+  transition: color var(--duration-fast) var(--ease-out-expo);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .text-link-social:hover { color: var(--accent); }
+}
+
+/* ---------- buttons ---------- */
+.button-primary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  border-radius: 80px;
+  padding: 24px 60px;
+  background-color: var(--text-strong);
+  color: var(--bg);
+  font-family: var(--font-ui);
+  font-size: var(--ui-body);
+  font-weight: var(--weight-700);
+  text-align: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  transform-style: preserve-3d;
+  transition: color var(--duration-fast), transform var(--duration-fast), box-shadow var(--duration-fast), background-color var(--duration-fast);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button-primary:hover {
+    background-color: var(--accent);
+    color: var(--accent-ink);
+    transform: translate3d(0, -6px, .01px);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+.button-primary:active {
+  background-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.button-primary.small { padding: 14px 32px; font-size: 16px; line-height: 18px; }
+.button-primary.large { padding: 20px 68px; font-size: 22px; line-height: 24px; }
+.button-primary.full-width { display: flex; align-self: stretch; width: 100%; }
+
+.button-secondary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: 500px;
+  padding: 24px 60px;
+  background-color: var(--surface-1);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: var(--ui-body);
+  font-weight: var(--weight-700);
+  text-align: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color var(--duration-fast), color var(--duration-fast), transform var(--duration-fast);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button-secondary:hover {
+    border-color: var(--text-strong);
+    background-color: var(--text-strong);
+    color: var(--bg);
+    transform: translate(0, -6px);
+  }
+}
+
+.button-secondary:active {
+  border-color: var(--text-strong);
+  background-color: var(--text-strong);
+  color: var(--bg);
+}
+
+.button-secondary.small { padding: 14px 32px; font-size: 16px; line-height: 18px; }
+.button-secondary.large { padding: 20px 68px; font-size: 22px; line-height: 24px; }
+
+.button-primary[disabled],
+.button-secondary[disabled] { opacity: .35; pointer-events: none; }
+
+/* Kitpro's floating pill, kept small so it can sit over content. */
+.button-sticky {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap-button);
+  border-radius: max(6px, .5vw);
+  padding: max(8px, .65vw) max(14px, 1.2vw);
+  background-color: var(--text-strong);
+  color: var(--bg);
+  font-family: var(--font-ui);
+  font-size: var(--ui-body-s);
+  font-weight: var(--weight-600);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color var(--duration-fast) var(--ease-out-expo), color var(--duration-fast) var(--ease-out-expo);
+}
+
+.button-sticky.v2 { background-color: var(--bg); color: var(--text-strong); border: 1px solid var(--border); }
+@media (hover: hover) and (pointer: fine) {
+  .button-sticky:hover { background-color: var(--accent); color: var(--accent-ink); }
+}
+.button-sticky:active { background-color: var(--accent); color: var(--accent-ink); }
+
+.icon-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.6vw;
+  height: 2.6vw;
+  min-width: 34px;
+  min-height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background-color: var(--surface-2);
+  color: var(--text-strong);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out-expo), transform var(--duration-fast) var(--ease-out-expo);
+}
+
+.icon-button:hover { background-color: var(--accent); color: var(--accent-ink); transform: rotate(45deg); }
+.icon-button.reverse:hover { transform: rotate(-45deg); }
+.icon-button svg { width: 46%; height: 46%; }
+
+/* Several source marks (close.svg, the Az Artful logo and the rotating
+   badge) ship with a hardcoded black fill and would vanish on the dark
+   shell, so they are inverted rather than recoloured. */
+.wrapper-close img,
+.mark-inverted { filter: invert(var(--mark-invert)); }
+
+/* You X quick checkout row. */
+.quick-checkout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: 500px;
+  padding: 14px 28px;
+  background-color: var(--paper);
+  color: var(--paper-text-strong);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  font-weight: var(--weight-700);
+  cursor: pointer;
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+}
+
+.quick-checkout:hover { border-color: var(--paper-text-strong); box-shadow: var(--shadow-md); }
+.quick-checkout img { width: 16px; height: 16px; }
+
+/* ---------- tags & badges ---------- */
+/* All three chips are inline-flex, so a flex column parent would stretch
+   them edge to edge without an explicit cross-axis alignment. */
+.tag-service,
+.tag-company,
+.badge-home { align-self: flex-start; }
+
+.tag-service {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-button);
+  border-radius: var(--radius-pill);
+  padding: var(--gap-xxs) var(--gap-xs);
+  background-color: var(--surface-1);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: var(--ui-body-s);
+  letter-spacing: .02em;
+}
+
+.tag-company {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: var(--gap-button) var(--gap-xxs);
+  background-color: var(--surface-1);
+  color: var(--text-strong);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+/* The 0.3vw square Kitpro uses as a bullet before eyebrow copy. */
+.square-tag { aspect-ratio: 1; width: .3vw; min-width: 5px; background-color: var(--accent); }
+
+.badge-home {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--paper-border);
+  border-radius: 50px;
+  padding: 14px 22px;
+  background-color: var(--paper);
+  color: var(--paper-text-strong);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  font-weight: var(--weight-700);
+  line-height: 18px;
+  box-shadow: var(--shadow-md);
+}
+
+.badge-home.accent { background-color: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.badge-home.ice { background-color: var(--secondary-ice); border-color: var(--secondary-ice); }
+.badge-home.sand { background-color: var(--secondary-sand); border-color: var(--secondary-sand); }
+.badge-home.lilac { background-color: var(--secondary-lilac); border-color: var(--secondary-lilac); }
+
+/* ---------- cards ---------- */
+.card {
+  border-radius: var(--radius-card);
+  border: 1px solid var(--paper-border);
+  background-color: var(--paper);
+  color: var(--text-muted);
+  overflow: hidden;
+}
+
+.grid > .card,
+.grid > .card-career { height: 100%; }
+
+.card.dark { background-color: var(--border); color: var(--text); }
+.card.outline { background-color: #0000; border: 1px solid var(--border); }
+.card.padded { padding: 40px; }
+.card.blog-card { display: flex; flex-direction: column; min-height: 100%; border: 1px solid var(--border); }
+.card.blog-card .card-body { padding: 32px; }
+.card.testimonial-card { border-radius: 24px; padding: 40px; }
+.card.service-card { display: flex; align-items: flex-start; gap: 20px; padding: 48px 48px 48px 40px; }
+
+/* The source service icons are white-stroked SVGs, so on a paper card
+   they need the dark chip they sit on in the original layout. */
+.service-icon { flex: 0 0 auto; width: 72px; height: 72px; padding: 16px; border-radius: var(--radius-card); background-color: var(--color-bg-section); }
+
+.card h4, .card h5 { font-family: var(--font-ui); }
+
+/* Cards on a paper surface flip the whole text stack to the dark neutrals. */
+.card:not(.dark):not(.outline) { color: var(--paper-text); }
+.card:not(.dark):not(.outline) h4,
+.card:not(.dark):not(.outline) h5,
+.card:not(.dark):not(.outline) .spec-label { color: var(--paper-text-strong); }
+.card:not(.dark):not(.outline) .spec { color: var(--paper-text); }
+
+.card.dark h4, .card.dark h5,
+.card.outline h4, .card.outline h5 { color: var(--text-strong); }
+.card.outline { color: var(--text); }
+
+/* Kitpro career card: fluid box, dark surface, year + role + meta. */
+.card-career {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-s);
+  width: 100%;
+  min-height: var(--height-card-career);
+  padding: var(--gap-s);
+  border-radius: var(--radius-md);
+  background-color: var(--surface-3);
+  border: 1px solid var(--border);
+  position: relative;
+}
+
+.year-career { font-family: var(--font-display); font-size: var(--size-h5); font-weight: var(--weight-700); color: var(--text-strong); }
+.info-card-career { display: flex; gap: var(--gap-xxs); font-family: var(--font-ui); font-size: 13px; letter-spacing: .04em; text-transform: uppercase; opacity: .6; }
+.body-card-career { display: flex; flex-direction: column; gap: var(--gap-xxs); }
+
+/* Az Artful project tile: image zooms, white sheet wipes up, arrow slides. */
+.project-item { position: relative; display: block; width: 100%; overflow: hidden; }
+.project-item-image-holder { position: relative; overflow: hidden; border-radius: var(--radius-md); }
+.project-item-image { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform var(--duration-slow) var(--ease-out-expo); }
+@media (hover: hover) and (pointer: fine) {
+  .project-item:hover .project-item-image { transform: scale3d(1.06, 1.06, 1); }
+  .project-item:hover .project-item-image-overlay { opacity: .12; transform: translate3d(0, 0, 0); }
+}
+
+.project-item-image-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: var(--text-strong);
+  opacity: 0;
+  transform: translate3d(0, 100%, 0);
+  transition: transform var(--duration-base) var(--ease-out-expo), opacity var(--duration-base) var(--ease-out-expo);
+}
+
+.project-item-content { position: relative; display: flex; justify-content: space-between; align-items: flex-start; gap: var(--gap-xs); margin-top: 1em; }
+.project-item-title { margin: 0; font-family: var(--font-display); font-size: var(--size-h6); font-weight: var(--weight-600); color: var(--text-strong); }
+.project-item-arrow { width: 22px; transform: rotate(-45deg); transition: transform var(--duration-fast) var(--ease-out-expo); }
+@media (hover: hover) and (pointer: fine) {
+  .project-item:hover .project-item-arrow { transform: rotate(0deg) translate3d(6px, -6px, 0); }
+}
+
+/* Lean work list: Kitpro numbered row + You X title/category split.
+   Use when the piece has no image; the Az Artful tile stays for visual work. */
+.work-list { display: flex; flex-direction: column; }
+
+.work-item {
+  border-bottom: 1px solid var(--border);
+  padding: var(--gap-s) 0;
+}
+
+.work-link {
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr) auto;
+  column-gap: var(--gap-xs);
+  row-gap: var(--gap-xxs);
+  align-items: baseline;
+  color: inherit;
+  touch-action: manipulation;
+}
+
+.work-link .service-no { grid-column: 1; }
+
+.work-title {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .35em;
+  grid-column: 2;
+  margin: 0;
+  color: var(--text-strong);
+  font-family: var(--font-display);
+  font-size: var(--size-h4);
+  font-weight: var(--weight-500);
+  letter-spacing: -.03em;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+  transition: color var(--duration-fast) var(--ease-out-expo);
+}
+
+.work-arrow {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  transform: rotate(-45deg);
+  transition: transform var(--duration-fast) var(--ease-out-expo);
+}
+
+.work-link .tag-company {
+  grid-column: 3;
+  justify-self: end;
+  align-self: center;
+  white-space: nowrap;
+}
+
+.work-lead {
+  grid-column: 2 / -1;
+  max-width: 58ch;
+  margin: 0;
+  font-size: var(--ui-body);
+}
+
+a.work-link:focus-visible .work-title { color: var(--accent); }
+a.work-link:focus-visible .work-arrow { transform: rotate(0deg) translate3d(6px, -6px, 0); }
+
+@media (hover: hover) and (pointer: fine) {
+  a.work-link:hover .work-title { color: var(--accent); }
+  a.work-link:hover .work-arrow { transform: rotate(0deg) translate3d(6px, -6px, 0); }
+}
+
+/* ---------- service accordion — Kitpro ---------- */
+.service-item { border-bottom: 1px solid var(--border); padding: var(--gap-xs) 0; }
+.service-row { display: flex; align-items: center; gap: var(--gap-s); width: 100%; background: none; border: 0; padding: 0; min-height: 44px; cursor: pointer; text-align: left; touch-action: manipulation; }
+.service-no { font-family: var(--font-mono); font-size: var(--ui-body-s); color: var(--accent); }
+.service-state { margin-left: auto; flex-shrink: 0; }
+.service-title { flex: 1; min-width: 0; margin: 0; font-family: var(--font-display); font-size: var(--size-h4); font-weight: var(--weight-500); color: var(--text-strong); line-height: 1.2; overflow-wrap: break-word; transition: color var(--duration-fast) var(--ease-out-expo); }
+@media (hover: hover) and (pointer: fine) {
+  .service-row:hover .service-title { color: var(--accent); }
+}
+.service-state { font-family: var(--font-ui); font-size: var(--ui-body-s); color: var(--text); }
+.service-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--duration-base) var(--ease-out-expo); }
+.service-panel > div { overflow: hidden; }
+.service-item.is-open .service-panel { grid-template-rows: 1fr; }
+.service-panel-inner { display: flex; flex-direction: column; gap: var(--gap-xs); padding-top: var(--gap-xs); max-width: 62ch; }
+.service-panel-inner p { margin: 0; }
+
+/* FAQ as open entries: same hairline rhythm as the work list, no extra click
+   when the answer is already a sentence. */
+.faq-list { display: flex; flex-direction: column; }
+
+.faq-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xxs);
+  border-bottom: 1px solid var(--border);
+  padding: var(--gap-s) 0;
+}
+
+.faq-item dt {
+  margin: 0;
+  color: var(--text-strong);
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  font-weight: var(--weight-500);
+  letter-spacing: -.02em;
+  line-height: 1.3;
+}
+
+.faq-item dd {
+  margin: 0;
+  max-width: 62ch;
+  font-size: var(--ui-body);
+}
+
+/* ---------- form controls — You X, recoloured for the dark shell ---------- */
+.input,
+.text-area {
+  width: 100%;
+  border: 1px solid var(--border);
+  background-color: var(--surface-1);
+  color: var(--text-strong);
+  font-family: var(--font-ui);
+  font-size: var(--ui-body);
+  line-height: 1em;
+  transition: border-color var(--duration-fast);
+}
+
+.input { border-radius: 500px; min-height: 70px; padding: 25px 27px; }
+.text-area { border-radius: var(--radius-card); min-height: 126px; max-height: 200px; padding: 25px 27px; line-height: 1.5; resize: vertical; }
+
+.input::placeholder,
+.text-area::placeholder { color: var(--text-muted); }
+
+.input:hover,
+.text-area:hover { border-color: var(--text-muted); }
+
+.input:focus,
+.text-area:focus { outline: none; border-color: var(--accent); }
+
+.field { display: flex; flex-direction: column; gap: 10px; }
+.field-label { font-family: var(--font-ui); font-size: var(--ui-body-s); font-weight: var(--weight-700); letter-spacing: .06em; text-transform: uppercase; color: var(--text-strong); }
+
+.divider { width: 100%; height: 2px; background-color: var(--border); }
+
+/* ---------- token display ---------- */
+.swatch { display: flex; flex-direction: column; gap: 10px; cursor: pointer; }
+.swatch-chip { height: 96px; border-radius: var(--radius-md); border: 1px solid var(--swatch-border); transition: transform var(--duration-fast) var(--ease-out-expo); }
+.swatch:hover .swatch-chip { transform: translate3d(0, -6px, 0); }
+
+/* The palette chips must always paint the raw token they document, so
+   they deliberately bypass the semantic layer and never follow the theme. */
+.swatch-chip[data-token="black"] { background-color: var(--color-black); }
+.swatch-chip[data-token="bg-section"] { background-color: var(--color-bg-section); }
+.swatch-chip[data-token="surface-1"] { background-color: var(--color-surface-1); }
+.swatch-chip[data-token="surface-2"] { background-color: var(--color-surface-2); }
+.swatch-chip[data-token="surface-3"] { background-color: var(--color-surface-3); }
+.swatch-chip[data-token="dark-gray"] { background-color: var(--color-dark-gray); }
+.swatch-chip[data-token="neutral-200"] { background-color: var(--neutral-200); }
+.swatch-chip[data-token="neutral-300"] { background-color: var(--neutral-300); }
+.swatch-chip[data-token="neutral-400"] { background-color: var(--neutral-400); }
+.swatch-chip[data-token="neutral-500"] { background-color: var(--neutral-500); }
+.swatch-chip[data-token="neutral-600"] { background-color: var(--neutral-600); }
+.swatch-chip[data-token="neutral-800"] { background-color: var(--neutral-800); }
+.swatch-chip[data-token="accent-slate"] { background-color: var(--accent-slate); }
+.swatch-chip[data-token="accent-slate-bright"] { background-color: var(--accent-slate-bright); }
+.swatch-chip[data-token="secondary-ice"] { background-color: var(--secondary-ice); }
+.swatch-chip[data-token="secondary-sand"] { background-color: var(--secondary-sand); }
+.swatch-chip[data-token="secondary-sky"] { background-color: var(--secondary-sky); }
+.swatch-chip[data-token="secondary-lilac"] { background-color: var(--secondary-lilac); }
+
+.type-specimen { display: flex; flex-direction: column; gap: var(--gap-xxs); border-bottom: 1px solid var(--border); padding-bottom: var(--gap-xs); }
+.type-sample { margin: 0; color: var(--text-strong); font-family: var(--font-display); line-height: 1.05; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Inside a card the specimen wraps; only the full-width ramp truncates. */
+.card .type-sample { white-space: normal; text-overflow: clip; }
+
+.type-sample[data-family="display"] { font-family: var(--font-display); }
+.type-sample[data-family="text"] { font-family: var(--font-text); }
+.type-sample[data-family="ui"] { font-family: var(--font-ui); }
+.type-sample[data-family="mono"] { font-family: var(--font-mono); }
+
+.type-sample[data-size="xl"] { font-size: var(--size-xl); line-height: var(--height-xl); font-weight: var(--weight-700); }
+.type-sample[data-size="l"] { font-size: var(--size-l); line-height: var(--height-l); font-weight: var(--weight-300); }
+.type-sample[data-size="h1"] { font-size: var(--size-h1); line-height: var(--height-h1); font-weight: var(--weight-700); }
+.type-sample[data-size="h2"] { font-size: var(--size-h2); font-weight: var(--weight-600); }
+.type-sample[data-size="h3"] { font-size: var(--size-h3); font-weight: var(--weight-600); }
+.type-sample[data-size="h4"] { font-size: var(--size-h4); font-weight: var(--weight-500); }
+.type-sample[data-size="h5"] { font-size: var(--size-h5); font-weight: var(--weight-500); }
+.type-sample[data-size="ui-body-l"] { font-family: var(--font-ui); font-size: var(--ui-body-l); line-height: 1.818em; }
+.type-sample[data-size="ui-body"] { font-family: var(--font-ui); font-size: var(--ui-body); font-weight: var(--weight-500); line-height: 1.777em; }
+.type-sample[data-size="ui-body-s"] { font-family: var(--font-ui); font-size: var(--ui-body-s); line-height: 1.6em; }
+
+.scale-bar { height: 14px; border-radius: var(--radius-sm); background-color: var(--accent); }
+.scale-bar[data-scale="button"] { width: var(--gap-button); }
+.scale-bar[data-scale="xxs"] { width: var(--gap-xxs); }
+.scale-bar[data-scale="xs"] { width: var(--gap-xs); }
+.scale-bar[data-scale="s"] { width: var(--gap-s); }
+.scale-bar[data-scale="ml"] { width: var(--gap-ml); }
+.scale-bar[data-scale="xl"] { width: var(--gap-xl); }
+
+.radius-box { height: 96px; border: 1px dashed var(--border); background-color: var(--surface-2); }
+.radius-box[data-radius="sm"] { border-radius: var(--radius-sm); }
+.radius-box[data-radius="md"] { border-radius: var(--radius-md); }
+.radius-box[data-radius="card"] { border-radius: var(--radius-card); }
+.radius-box[data-radius="pill"] { border-radius: var(--radius-pill); }
+
+.card[data-shadow="sm"] { box-shadow: var(--shadow-sm); }
+.card[data-shadow="md"] { box-shadow: var(--shadow-md); }
+.card[data-shadow="lg"] { box-shadow: var(--shadow-lg); }
+
+.avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+
+/* ---------- marquee — Az Artful ---------- */
+.marquee { display: flex; overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: var(--gap-xs) 0; }
+.marquee-track { display: flex; flex: 0 0 auto; gap: var(--gap-ml); padding-right: var(--gap-ml); animation: marquee-scroll 18s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-text { margin: 0; flex: 0 0 auto; font-family: var(--font-display); font-size: 6.8vw; font-weight: var(--weight-700); line-height: 1; color: var(--text-strong); }
+.marquee-text.outline { color: #0000; -webkit-text-stroke: 1px var(--border); }
+
+/* ---------- cursor — Az Artful circles + Kitpro crosshair ---------- */
+.cursor { pointer-events: none; }
+
+.wrapper-cursor { position: fixed; inset: 0; z-index: 30; pointer-events: none; display: none; }
+.line-cursor { position: absolute; background-color: var(--border); }
+.line-cursor.v1 { inset: 0 auto auto 0; width: 1px; height: 100%; }
+.line-cursor.v2 { inset: 0 auto auto 0; width: 100%; height: 1px; }
+
+.block-cursor {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 48px;
+  height: 48px;
+  overflow: visible;
+}
+.cursor-big-circle,
+.cursor-small-circle,
+.cursor-arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.cursor-big-circle {
+  z-index: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--cursor-soft);
+}
+.cursor-small-circle {
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--cursor-strong);
+}
+.cursor-arrow {
+  z-index: 2;
+  width: 22px;
+  height: 22px;
+  color: var(--bg);
+  opacity: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .wrapper-cursor { display: block; }
+  body.has-cursor,
+  body.has-cursor a,
+  body.has-cursor button { cursor: none; }
+}
+
+@media (max-width: 991px) {
+  .button-primary,
+  .button-secondary { padding: 16px 28px; min-height: 52px; }
+  .card.service-card { padding: 32px; }
+  .card.padded { padding: 28px; }
+  .marquee-text { font-size: 10vw; }
+  .nav-menu { display: none; }
+}
+
+@media (max-width: 767px) {
+  .work-link {
+    grid-template-columns: 2rem minmax(0, 1fr);
+    column-gap: var(--gap-xxs);
+  }
+
+  .work-link .tag-company,
+  .work-lead { grid-column: 2; justify-self: start; }
+
+  .work-link .tag-company { white-space: normal; }
+
+  .service-row {
+    align-items: flex-start;
+    gap: var(--gap-xs);
+    min-height: 52px;
+    padding: var(--gap-xxs) 0;
+  }
+
+  .service-no { padding-top: .15em; }
+  .service-state { margin-top: .15em; }
+}

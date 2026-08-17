@@ -1,0 +1,329 @@
+/* Page composition */
+/* Page composition for the live site.
+   Tokens, type, components and motion stay in the design system;
+   this sheet sizes the folds and the mobile-first overrides a
+   personal homepage needs on top of that library. */
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--padding-container);
+  top: -120px;
+  z-index: 40;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  background-color: var(--text-strong);
+  color: var(--bg);
+  font-family: var(--font-ui);
+  font-size: var(--ui-body-s);
+  font-weight: var(--weight-700);
+}
+
+.skip-link:focus {
+  top: var(--padding-section-sm);
+  outline-offset: 4px;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding-left: max(var(--padding-container), env(safe-area-inset-left));
+  padding-right: max(var(--padding-container), env(safe-area-inset-right));
+}
+
+/* Two essential links fit a phone bar; keep them visible when the library hides menus. */
+.navbar .nav-menu { display: flex; }
+
+.brand {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  font-size: 1.25rem;
+  font-weight: var(--weight-400);
+  letter-spacing: -.03em;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.brand strong { font-weight: var(--weight-700); }
+
+.section-head h2 {
+  line-height: 1.12;
+  letter-spacing: -.035em;
+}
+
+.section-head .perspective {
+  width: 100%;
+  padding-bottom: 0.12em;
+}
+
+.square-tag {
+  width: 6px;
+  min-width: 6px;
+}
+
+.main-section[id],
+footer[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* First fold is the viewport: navbar sits on top, marquee starts after a scroll. */
+.hero {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+  padding-top: max(5.5rem, calc(env(safe-area-inset-top) + 4.25rem));
+  padding-bottom: max(2.5rem, env(safe-area-inset-bottom));
+}
+
+.hero > .container { width: 100%; }
+
+.hero-name {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  color: var(--text-strong);
+  font-family: var(--font-display);
+  font-size: var(--size-xl);
+  font-weight: var(--weight-700);
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+}
+
+.hero-name .perspective,
+.hero-name .perspective-load { display: block; }
+
+/* Room for the g, only on the surname so the two lines stay stacked tight. */
+.hero-name .perspective:last-child {
+  margin-top: -0.08em;
+  padding-bottom: 0.2em;
+}
+
+.hero-surname { font-weight: var(--weight-300); }
+
+.hero-intro,
+.hero .section-lead {
+  max-width: 58ch;
+}
+
+.hero .section-lead { margin: 0; }
+
+.hero-actions,
+.close-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gap-xs);
+}
+
+.close {
+  padding-bottom: max(var(--padding-section-lg), env(safe-area-inset-bottom));
+}
+
+.close-title {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  color: var(--text-strong);
+  font-family: var(--font-display);
+  font-size: var(--size-h1);
+  font-weight: var(--weight-700);
+  line-height: 1.05;
+  letter-spacing: -.04em;
+  overflow-wrap: break-word;
+}
+
+.close-title .perspective,
+.close-title .perspective-load { display: block; }
+
+.close-title .perspective:first-child { padding-top: 0.1em; }
+.close-title .perspective:last-child { padding-bottom: 0.14em; }
+
+.close-title-soft { font-weight: var(--weight-300); }
+
+.close .section-lead { max-width: 46ch; }
+
+.close-channels {
+  color: var(--text-muted);
+}
+
+.close-channels .text-link-social {
+  padding: .35rem 0;
+  touch-action: manipulation;
+}
+
+.close-foot {
+  justify-content: space-between;
+  gap: var(--gap-s);
+}
+
+#ferramentas .grid { gap: var(--gap-s); }
+
+@media (hover: none) {
+  .nav-link:hover .nav-link-text { transform: none; }
+  .theme-toggle:hover { border-color: var(--border); color: var(--text-strong); }
+  .service-row:hover .service-title { color: var(--text-strong); }
+  .text-link-social:hover { color: var(--text); }
+
+  .button-primary:active,
+  .button-secondary:active,
+  a.work-link:active .work-title,
+  .service-row:active .service-title,
+  .text-link-social:active { color: var(--accent); }
+
+  .button-primary:active { color: var(--accent-ink); }
+  .button-secondary:active { color: var(--bg); }
+}
+
+/* Tablet: keep the editorial split, tighten the first fold a little. */
+@media (max-width: 991px) {
+  .navbar .button-sticky { display: none; }
+
+  .hero {
+    min-height: 100svh;
+    min-height: 100dvh;
+    padding-top: max(5.25rem, calc(env(safe-area-inset-top) + 4rem));
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  }
+
+  /* Three cards: avoid a 2+1 widow on tablet. */
+  #ferramentas .grid.cols-3 { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Phone: stacked hierarchy, thumb-sized controls, no leftover desktop columns. */
+@media (max-width: 767px) {
+  body { font-size: 16px; line-height: 1.65; }
+
+  .navbar,
+  .main-section {
+    padding-left: max(1.75rem, env(safe-area-inset-left));
+    padding-right: max(1.75rem, env(safe-area-inset-right));
+  }
+
+  .navbar > .container { gap: .75rem; }
+
+  .brand { font-size: 1rem; }
+
+  .nav-menu { gap: .55rem; }
+
+  .nav-link.nav-optional { display: none; }
+
+  .nav-link {
+    height: auto;
+    min-height: 44px;
+    overflow: visible;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 .45rem;
+    letter-spacing: .06em;
+  }
+
+  .nav-link-text.absolute { display: none; }
+
+  .theme-toggle {
+    width: 44px;
+    height: 44px;
+  }
+
+  .main-section.tight {
+    padding-top: var(--padding-section-lg);
+    padding-bottom: var(--padding-section-lg);
+  }
+
+  .section-head {
+    margin-bottom: var(--gap-s);
+    padding-bottom: var(--gap-xs);
+  }
+
+  .hero-name {
+    font-size: clamp(3.05rem, 14.5vw, 4.15rem);
+    line-height: 0.9;
+    letter-spacing: -.05em;
+  }
+
+  .hero-name .perspective:last-child {
+    margin-top: -0.04em;
+    padding-bottom: 0.16em;
+  }
+
+  .hero-intro { gap: 1rem; }
+
+  .hero .section-lead,
+  .section-lead,
+  .work-lead,
+  .faq-item dd {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+
+  .hero-actions,
+  .close-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 22rem;
+  }
+
+  .hero-actions .button-primary,
+  .hero-actions .button-secondary,
+  .close-actions .button-primary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .close-title {
+    font-size: clamp(2.15rem, 11.5vw, 3rem);
+    line-height: 1.08;
+  }
+
+  .close-channels {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: 0 var(--gap-s);
+  }
+
+  .close-channels .text-link-social {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+@media (max-width: 479px) {
+  .hero-name {
+    font-size: clamp(2.45rem, 13.5vw, 3.1rem);
+  }
+
+  .close-title {
+    font-size: clamp(1.7rem, 9.2vw, 2.2rem);
+  }
+
+  .close-foot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-xxs);
+  }
+
+  .brand {
+    min-width: 0;
+    font-size: .875rem;
+  }
+
+  .nav-menu { gap: .25rem; }
+
+  .nav-link {
+    font-size: 12px;
+    padding: 0 .25rem;
+    letter-spacing: .05em;
+  }
+}
