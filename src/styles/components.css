@@ -155,22 +155,7 @@
   text-align: center;
   cursor: pointer;
   touch-action: manipulation;
-  transform-style: preserve-3d;
-  transition: color var(--duration-fast), transform var(--duration-fast), box-shadow var(--duration-fast), background-color var(--duration-fast);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .button-primary:hover {
-    background-color: var(--accent);
-    color: var(--accent-ink);
-    transform: translate3d(0, -6px, .01px);
-    box-shadow: var(--shadow-lg);
-  }
-}
-
-.button-primary:active {
-  background-color: var(--accent);
-  color: var(--accent-ink);
+  transition: transform .15s ease;
 }
 
 .button-primary.small { padding: 14px 32px; font-size: 16px; line-height: 18px; }
@@ -193,22 +178,7 @@
   text-align: center;
   cursor: pointer;
   touch-action: manipulation;
-  transition: background-color var(--duration-fast), color var(--duration-fast), transform var(--duration-fast);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .button-secondary:hover {
-    border-color: var(--text-strong);
-    background-color: var(--text-strong);
-    color: var(--bg);
-    transform: translate(0, -6px);
-  }
-}
-
-.button-secondary:active {
-  border-color: var(--text-strong);
-  background-color: var(--text-strong);
-  color: var(--bg);
+  transition: transform .15s ease;
 }
 
 .button-secondary.small { padding: 14px 32px; font-size: 16px; line-height: 18px; }
@@ -216,6 +186,41 @@
 
 .button-primary[disabled],
 .button-secondary[disabled] { opacity: .35; pointer-events: none; }
+
+.button-primary,
+.button-secondary {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+}
+
+.button-primary:active,
+.button-secondary:active {
+  transform: scale(0.97);
+}
+
+.button-primary[disabled]:active,
+.button-secondary[disabled]:active {
+  transform: none;
+}
+
+.button-fx {
+  position: absolute;
+  inset: -20px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.button-fx canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.button-label {
+  position: relative;
+  z-index: 2;
+}
 
 /* Kitpro's floating pill, kept small so it can sit over content. */
 .button-sticky {

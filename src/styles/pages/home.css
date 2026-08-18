@@ -254,14 +254,9 @@ footer[id] {
   .service-row:hover .service-title { color: var(--text-strong); }
   .text-link-social:hover { color: var(--text); }
 
-  .button-primary:active,
-  .button-secondary:active,
   a.work-link:active .work-title,
   .service-row:active .service-title,
   .text-link-social:active { color: var(--accent); }
-
-  .button-primary:active { color: var(--accent-ink); }
-  .button-secondary:active { color: var(--bg); }
 }
 
 /* Tablet: keep the editorial split, tighten the first fold a little. */
