@@ -1,4 +1,5 @@
 import { initCursor, initHeroParallax } from './cursor';
+import { initHeroThreads } from './threads';
 
 const REVEAL_SEL = '.fade-up, .fade-in, .perspective-load, .scale-in, .line-draw';
 
@@ -274,6 +275,7 @@ export function initHome(): void {
 		heroIntro();
 		scrollReveal();
 		initHeroParallax();
+		initHeroThreads();
 		navAutoHide();
 		marqueePause();
 		initCursor();
