@@ -32,11 +32,13 @@ const classes = [`button-${variant}`, size, fullWidth && 'full-width', className
 			target={external ? '_blank' : undefined}
 			rel={external ? 'noopener noreferrer' : undefined}
 		>
-			<slot />
+			<span class="button-fx" aria-hidden="true"></span>
+			<span class="button-label"><slot /></span>
 		</a>
 	) : (
 		<button class:list={classes} type={type} disabled={disabled || undefined}>
-			<slot />
+			<span class="button-fx" aria-hidden="true"></span>
+			<span class="button-label"><slot /></span>
 		</button>
 	)
 }
