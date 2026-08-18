@@ -17,7 +17,6 @@ export function initCursor(): void {
 	const ease = 'power2.out';
 	const dur = 0.4;
 	const LINK_DISC = 48 / 22;
-	const PROJECT_DISC = 100 / 22;
 
 	if (blockCursor) gsap.set(blockCursor, { xPercent: -50, yPercent: -50 });
 	gsap.set([bigCircle, smallCircle, arrow].filter(Boolean), { xPercent: -50, yPercent: -50 });
@@ -41,10 +40,10 @@ export function initCursor(): void {
 		if (arrow) gsap.to(arrow, { opacity: 0, scale: 0.2, duration: dur, ease, overwrite: 'auto' });
 	}
 
-	function showArrow(large: boolean) {
+	function showArrow() {
 		if (bigCircle) gsap.to(bigCircle, { opacity: 0, scale: 1, duration: dur, ease, overwrite: 'auto' });
-		if (smallCircle) gsap.to(smallCircle, { scale: large ? PROJECT_DISC : LINK_DISC, duration: dur, ease, overwrite: 'auto' });
-		if (arrow) gsap.to(arrow, { opacity: 1, scale: large ? 2 : 1, duration: dur, ease, overwrite: 'auto' });
+		if (smallCircle) gsap.to(smallCircle, { scale: LINK_DISC, duration: dur, ease, overwrite: 'auto' });
+		if (arrow) gsap.to(arrow, { opacity: 1, scale: 1, duration: dur, ease, overwrite: 'auto' });
 	}
 
 	function swell() {
@@ -56,8 +55,7 @@ export function initCursor(): void {
 	const targets = 'a, button, .project-item, .service-row, .work-item, .swatch-chip';
 	document.querySelectorAll<HTMLElement>(targets).forEach((el) => {
 		el.addEventListener('mouseenter', () => {
-			if (el.matches('a.work-link, .project-item, .work-item')) showArrow(true);
-			else if (el.matches('a, .brand')) showArrow(false);
+			if (el.matches('a, .brand, .project-item, .work-item')) showArrow();
 			else swell();
 		});
 		el.addEventListener('mouseleave', rest);
