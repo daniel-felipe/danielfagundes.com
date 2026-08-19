@@ -43,6 +43,13 @@ html.w-mod-js .perspective-load {
   transition: transform var(--duration-slow) var(--ease-out-expo), opacity var(--duration-slow) var(--ease-out-expo);
 }
 
+/* LCP is the hero name: paint it on the first frame instead of waiting for JS. */
+html.w-mod-js .hero-name .perspective-load {
+  transform: none;
+  opacity: 1;
+  will-change: auto;
+}
+
 html.w-mod-js .fade-up {
   transform: translate3d(0, 20px, 0);
   opacity: 0;
