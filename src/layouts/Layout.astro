@@ -1,16 +1,73 @@
 ---
 import { getAbsoluteLocaleUrl } from 'astro:i18n';
+import type { HomeCopy, Locale } from '../data/home';
 import '../styles/global.css';
 
 interface Props {
-	title: string;
-	description: string;
-	htmlLang: string;
+	locale: Locale;
+	copy: HomeCopy;
 }
 
-const { title, description, htmlLang } = Astro.props;
+const { locale, copy } = Astro.props;
+const { title, description, jobTitle, ogImageAlt } = copy.meta;
+const htmlLang = copy.htmlLang;
+
 const ptUrl = getAbsoluteLocaleUrl('pt-br');
 const enUrl = getAbsoluteLocaleUrl('en');
+const canonical = getAbsoluteLocaleUrl(locale);
+const siteOrigin = (Astro.site ?? new URL('https://danielfagundes.com')).origin;
+const ogImage = new URL('/og.png', siteOrigin).href;
+const ogLocale = locale === 'en' ? 'en_US' : 'pt_BR';
+const ogLocaleAlternate = locale === 'en' ? 'pt_BR' : 'en_US';
+
+const sameAs = copy.contact.channels.filter((channel) => channel.external).map((channel) => channel.href);
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'WebSite',
+			'@id': `${siteOrigin}/#website`,
+			url: ptUrl,
+			name: copy.contact.name,
+			inLanguage: ['pt-BR', 'en'],
+			publisher: { '@id': `${siteOrigin}/#person` },
+		},
+		{
+			'@type': 'Person',
+			'@id': `${siteOrigin}/#person`,
+			name: copy.contact.name,
+			jobTitle,
+			url: canonical,
+			email: copy.email,
+			sameAs,
+			worksFor: { '@type': 'Organization', name: 'DevStats' },
+			knowsAbout: [
+				'Laravel',
+				'React',
+				'PHP',
+				'Python',
+				'n8n',
+				'PostgreSQL',
+				'API integration',
+				'Web applications',
+			],
+		},
+		{
+			'@type': 'FAQPage',
+			'@id': `${canonical}#faq`,
+			url: `${canonical}#faq`,
+			mainEntity: copy.faq.items.map((item) => ({
+				'@type': 'Question',
+				name: item.question,
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: item.answer,
+				},
+			})),
+		},
+	],
+};
 ---
 
 <!doctype html>
@@ -19,9 +76,25 @@ const enUrl = getAbsoluteLocaleUrl('en');
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="canonical" href={canonical} />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={copy.contact.name} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:locale" content={ogLocale} />
+		<meta property="og:locale:alternate" content={ogLocaleAlternate} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={ogImageAlt} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+		<meta name="twitter:image:alt" content={ogImageAlt} />
 		<link rel="alternate" hreflang="pt-BR" href={ptUrl} />
 		<link rel="alternate" hreflang="en" href={enUrl} />
 		<link rel="alternate" hreflang="x-default" href={ptUrl} />
@@ -29,11 +102,12 @@ const enUrl = getAbsoluteLocaleUrl('en');
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Manrope:wght@200..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+			href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Manrope:wght@300;500;600;700;800&family=Open+Sans:wght@400&display=swap"
 			rel="stylesheet"
 		/>
 		{/* Must run before paint: .w-mod-js / theme to avoid flash */}
 		<script is:inline src="/scripts/boot.js"></script>
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 	</head>
 	<body>
 		<slot />
