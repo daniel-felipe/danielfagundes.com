@@ -1,6 +1,7 @@
 ---
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import type { HomeCopy, Locale } from '../../data/home';
+import Button from '../Button.astro';
 
 interface Props {
 	locale: Locale;
@@ -16,18 +17,26 @@ const enHref = getRelativeLocaleUrl('en');
 <header class="navbar">
 	<div class="container">
 		<a class="brand" href="#topo" aria-label={copy.nav.brandAria}><strong>daniel.</strong>fagundes_</a>
-		<nav class="nav-menu" aria-label={copy.nav.menuAria}>
+		<nav class="nav-menu" id="nav-menu" aria-label={copy.nav.menuAria}>
 			{
 				copy.nav.links.map((link) => (
-					<a class:list={['nav-link', { 'nav-optional': link.optional }]} href={link.href}>
+					<a class="nav-link" href={link.href}>
 						<span class="nav-link-text">{link.label}</span>
 						<span class="nav-link-text absolute">{link.label}</span>
 					</a>
 				))
 			}
+			<div class="nav-menu-foot">
+				<nav class="lang-switch" aria-label={copy.nav.langAria}>
+					<a href={ptHref} aria-current={locale === 'pt-br' ? 'true' : undefined}>PT</a>
+					<span aria-hidden="true">/</span>
+					<a href={enHref} aria-current={locale === 'en' ? 'true' : undefined}>EN</a>
+				</nav>
+				<Button href="#contato">{copy.hero.contactCta}</Button>
+			</div>
 		</nav>
 		<div class="row tight">
-			<nav class="lang-switch" aria-label={copy.nav.langAria}>
+			<nav class="lang-switch nav-lang-bar" aria-label={copy.nav.langAria}>
 				<a href={ptHref} aria-current={locale === 'pt-br' ? 'true' : undefined}>PT</a>
 				<span aria-hidden="true">/</span>
 				<a href={enHref} aria-current={locale === 'en' ? 'true' : undefined}>EN</a>
@@ -57,6 +66,19 @@ const enHref = getRelativeLocaleUrl('en');
 				>
 					<path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z"></path>
 				</svg>
+			</button>
+			<button
+				class="menu-toggle"
+				type="button"
+				data-menu-toggle
+				aria-expanded="false"
+				aria-controls="nav-menu"
+				aria-label={copy.nav.menuOpen}
+				data-label-open={copy.nav.menuOpen}
+				data-label-close={copy.nav.menuClose}
+			>
+				<span class="menu-toggle-bar" aria-hidden="true"></span>
+				<span class="menu-toggle-bar" aria-hidden="true"></span>
 			</button>
 		</div>
 	</div>
