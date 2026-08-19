@@ -6,7 +6,6 @@ export type Locale = 'pt-br' | 'en';
 export interface NavLink {
 	href: string;
 	label: string;
-	optional?: boolean;
 }
 
 export interface MarqueeItem {
@@ -56,6 +55,8 @@ export interface HomeCopy {
 		skipToContent: string;
 		brandAria: string;
 		menuAria: string;
+		menuOpen: string;
+		menuClose: string;
 		themeToggle: string;
 		langAria: string;
 		links: NavLink[];
