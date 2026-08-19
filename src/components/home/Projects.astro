@@ -1,16 +1,25 @@
 ---
-import { projects, sectionIndex } from '../../data/home';
+import { sectionIndex } from '../../data/home';
+import type { HomeCopy } from '../../data/home';
 import ProjectItem from './ProjectItem.astro';
 import SectionHeading from './SectionHeading.astro';
+
+interface Props {
+	copy: HomeCopy;
+}
+
+const { copy } = Astro.props;
 ---
 
 <section class="main-section" id="projetos">
 	<div class="container stack">
 		<div class="section-head">
-			<SectionHeading index="01" title="Trabalhos recentes" />
+			<SectionHeading index="01" title={copy.projects.title} />
 		</div>
 		<ul class="work-list">
-			{projects.map((project, i) => <ProjectItem project={project} index={sectionIndex(i)} />)}
+			{copy.projects.items.map((project, i) => (
+				<ProjectItem project={project} index={sectionIndex(i)} />
+			))}
 		</ul>
 	</div>
 </section>

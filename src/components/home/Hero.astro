@@ -1,30 +1,36 @@
 ---
 import Button from '../Button.astro';
-import { site } from '../../data/home';
+import type { HomeCopy } from '../../data/home';
+
+interface Props {
+	copy: HomeCopy;
+}
+
+const { copy } = Astro.props;
 ---
 
 <section class="main-section hero" id="topo">
 	<div class="hero-threads" aria-hidden="true"></div>
 	<div class="container stack" id="conteudo">
 		<h1 class="hero-name">
-			<span class="perspective"><span class="perspective-load">Daniel</span></span>
-			<span class="perspective"><span class="perspective-load hero-surname">Fagundes</span></span>
+			<span class="perspective"><span class="perspective-load">{copy.hero.firstName}</span></span>
+			<span class="perspective"><span class="perspective-load hero-surname">{copy.hero.lastName}</span></span>
 		</h1>
 		<div class="hero-copy stack">
 			<div class="hero-intro stack tight">
 				<p class="section-lead fade-up">
-					Olá, eu sou o Daniel. Sou desenvolvedor Full-Stack e engenheiro de software na DevStats. No dia a dia, construo sistemas web com Laravel e React.
+					{copy.hero.p1}
 				</p>
 				<p class="section-lead fade-up">
-					Fora do trabalho, crio projetos próprios e exploro temas que me despertam curiosidade, como dados, IA e cibersegurança, utilizando tecnologias como Python.
+					{copy.hero.p2}
 				</p>
 				<p class="section-lead fade-up">
-					<a class="link" href="#projetos">Dê uma olhada no que já construí.<span class="link-underline"></span></a>
+					<a class="link" href="#projetos">{copy.hero.workLink}<span class="link-underline"></span></a>
 				</p>
 			</div>
 			<div class="row hero-actions fade-up">
-				<Button href="#contato">Entrar em contato</Button>
-				<Button variant="secondary" href={site.github} external>GitHub</Button>
+				<Button href="#contato">{copy.hero.contactCta}</Button>
+				<Button variant="secondary" href={copy.github} external>{copy.hero.githubCta}</Button>
 			</div>
 		</div>
 	</div>

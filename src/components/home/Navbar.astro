@@ -1,14 +1,24 @@
 ---
-import { navLinks } from '../../data/home';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import type { HomeCopy, Locale } from '../../data/home';
+
+interface Props {
+	locale: Locale;
+	copy: HomeCopy;
+}
+
+const { locale, copy } = Astro.props;
+const ptHref = getRelativeLocaleUrl('pt-br');
+const enHref = getRelativeLocaleUrl('en');
 ---
 
-<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<a class="skip-link" href="#conteudo">{copy.nav.skipToContent}</a>
 <header class="navbar">
 	<div class="container">
-		<a class="brand" href="#topo" aria-label="Daniel Fagundes, início"><strong>daniel.</strong>fagundes_</a>
-		<nav class="nav-menu" aria-label="Navegação principal">
+		<a class="brand" href="#topo" aria-label={copy.nav.brandAria}><strong>daniel.</strong>fagundes_</a>
+		<nav class="nav-menu" aria-label={copy.nav.menuAria}>
 			{
-				navLinks.map((link) => (
+				copy.nav.links.map((link) => (
 					<a class:list={['nav-link', { 'nav-optional': link.optional }]} href={link.href}>
 						<span class="nav-link-text">{link.label}</span>
 						<span class="nav-link-text absolute">{link.label}</span>
@@ -17,7 +27,12 @@ import { navLinks } from '../../data/home';
 			}
 		</nav>
 		<div class="row tight">
-			<button class="theme-toggle" type="button" data-theme-toggle aria-label="Alternar tema">
+			<nav class="lang-switch" aria-label={copy.nav.langAria}>
+				<a href={ptHref} aria-current={locale === 'pt-br' ? 'true' : undefined}>PT</a>
+				<span aria-hidden="true">/</span>
+				<a href={enHref} aria-current={locale === 'en' ? 'true' : undefined}>EN</a>
+			</nav>
+			<button class="theme-toggle" type="button" data-theme-toggle aria-label={copy.nav.themeToggle}>
 				<svg
 					class="icon-sun"
 					viewBox="0 0 24 24"

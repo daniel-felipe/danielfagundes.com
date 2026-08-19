@@ -4,17 +4,25 @@ import type { Service } from '../../data/home';
 interface Props {
 	service: Service;
 	index: string;
+	viewLabel: string;
+	closeLabel: string;
 }
 
-const { service, index } = Astro.props;
+const { service, index, viewLabel, closeLabel } = Astro.props;
 const open = Boolean(service.open);
 ---
 
 <div class:list={['service-item', 'fade-up', { 'is-open': open }]}>
-	<button class="service-row" type="button" aria-expanded={open ? 'true' : 'false'}>
+	<button
+		class="service-row"
+		type="button"
+		aria-expanded={open ? 'true' : 'false'}
+		data-label-open={closeLabel}
+		data-label-closed={viewLabel}
+	>
 		<span class="service-no">{index}</span>
 		<h3 class="service-title">{service.title}</h3>
-		<span class="service-state">{open ? '( Fechar )' : '( Ver )'}</span>
+		<span class="service-state">{open ? closeLabel : viewLabel}</span>
 	</button>
 	<div class="service-panel">
 		<div>

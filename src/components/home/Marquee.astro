@@ -1,12 +1,18 @@
 ---
-import { marqueeItems } from '../../data/home';
+import type { MarqueeItem } from '../../data/home';
+
+interface Props {
+	items: MarqueeItem[];
+}
+
+const { items } = Astro.props;
 ---
 
 <section class="marquee" aria-hidden="true">
 	{
 		[0, 1].map(() => (
 			<div class="marquee-track">
-				{marqueeItems.map((item) => (
+				{items.map((item) => (
 					<h2 class:list={['marquee-text', { outline: item.outline }]}>{item.label}</h2>
 				))}
 			</div>

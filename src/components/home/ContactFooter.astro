@@ -1,29 +1,35 @@
 ---
 import Button from '../Button.astro';
-import { channels, contact, site } from '../../data/home';
+import type { HomeCopy } from '../../data/home';
+
+interface Props {
+	copy: HomeCopy;
+}
+
+const { copy } = Astro.props;
 ---
 
 <footer class="main-section close" id="contato">
 	<div class="container stack">
 		<div class="row tight fade-up">
 			<div class="square-tag pulsing"></div>
-			<span class="section-index">{contact.eyebrow}</span>
+			<span class="section-index">{copy.contact.eyebrow}</span>
 		</div>
 		<h2 class="close-title">
 			<span class="stroke-text" data-stroke-text>
-				<span class="stroke-text__label">{contact.title}</span>
+				<span class="stroke-text__label">{copy.contact.title}</span>
 			</span>
-			<span class="close-title-soft fade-up">{contact.titleSoft}</span>
+			<span class="close-title-soft fade-up">{copy.contact.titleSoft}</span>
 		</h2>
 		<p class="section-lead fade-up">
-			{contact.lead}
+			{copy.contact.lead}
 		</p>
 		<div class="row close-actions fade-up">
-			<Button href={`mailto:${site.email}`}>{contact.cta}</Button>
+			<Button href={`mailto:${copy.email}`}>{copy.contact.cta}</Button>
 		</div>
-		<nav class="row close-channels fade-up" aria-label="Canais">
+		<nav class="row close-channels fade-up" aria-label={copy.contact.channelsAria}>
 			{
-				channels.map((channel) => (
+				copy.contact.channels.map((channel) => (
 					<a
 						class="text-link-social"
 						href={channel.href}
@@ -39,9 +45,9 @@ import { channels, contact, site } from '../../data/home';
 		<div class="row close-foot fade-up">
 			<div class="row tight">
 				<div class="square-tag"></div>
-				<span class="section-index">{contact.name}</span>
+				<span class="section-index">{copy.contact.name}</span>
 			</div>
-			<a class="link" href="#topo">{contact.backToTop}<span class="link-underline"></span></a>
+			<a class="link" href="#topo">{copy.contact.backToTop}<span class="link-underline"></span></a>
 		</div>
 	</div>
 </footer>

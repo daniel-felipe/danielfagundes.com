@@ -174,6 +174,10 @@ function marqueePause() {
 	io.observe(marquee);
 }
 
+function accordionLabel(control: Element, open: boolean): string {
+	return control.getAttribute(open ? 'data-label-open' : 'data-label-closed') ?? '';
+}
+
 function accordion() {
 	document.querySelectorAll('.service-row').forEach((row) => {
 		row.addEventListener('click', () => {
@@ -185,13 +189,13 @@ function accordion() {
 				const control = sibling.querySelector('.service-row');
 				if (control) control.setAttribute('aria-expanded', 'false');
 				const state = sibling.querySelector('.service-state');
-				if (state) state.textContent = '( Ver )';
+				if (state && control) state.textContent = accordionLabel(control, false);
 			});
 			if (open) return;
 			item.classList.add('is-open');
 			row.setAttribute('aria-expanded', 'true');
 			const state = item.querySelector('.service-state');
-			if (state) state.textContent = '( Fechar )';
+			if (state) state.textContent = accordionLabel(row, true);
 		});
 	});
 }
@@ -205,7 +209,7 @@ function copyTokens() {
 				const label = el.querySelector('.spec-value');
 				if (!label) return;
 				const original = label.textContent;
-				label.textContent = 'copiado';
+				label.textContent = el.getAttribute('data-copied') ?? original;
 				setTimeout(() => {
 					label.textContent = original;
 				}, 1200);

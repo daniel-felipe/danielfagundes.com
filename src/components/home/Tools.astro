@@ -1,16 +1,22 @@
 ---
-import { toolGroups } from '../../data/home';
+import type { HomeCopy } from '../../data/home';
 import SectionHeading from './SectionHeading.astro';
+
+interface Props {
+	copy: HomeCopy;
+}
+
+const { copy } = Astro.props;
 ---
 
 <section class="main-section" id="ferramentas">
 	<div class="container stack">
 		<div class="section-head">
-			<SectionHeading index="03" title="Ferramentas que uso" />
+			<SectionHeading index="03" title={copy.tools.title} />
 		</div>
 		<div class="grid cols-3">
 			{
-				toolGroups.map((group) => (
+				copy.tools.groups.map((group) => (
 					<div class="card outline padded scale-in stack tight">
 						<div class="spec">
 							<span class="spec-label">{group.label}</span>
