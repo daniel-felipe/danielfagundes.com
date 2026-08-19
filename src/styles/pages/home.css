@@ -284,6 +284,7 @@ footer[id] {
 @media (hover: none) {
   .nav-link:hover .nav-link-text { transform: none; }
   .theme-toggle:hover { border-color: var(--border); color: var(--text-strong); }
+  .lang-switch a:hover { color: var(--text); }
   .service-row:hover .service-title { color: var(--text-strong); }
   .text-link-social:hover { color: var(--text); }
 
