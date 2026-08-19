@@ -222,13 +222,46 @@ footer[id] {
   overflow-wrap: break-word;
 }
 
-.close-title .perspective,
-.close-title .perspective-load { display: block; }
-
-.close-title .perspective:first-child { padding-top: 0.1em; }
-.close-title .perspective:last-child { padding-bottom: 0.14em; }
-
 .close-title-soft { font-weight: var(--weight-300); }
+
+.stroke-text {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.stroke-text__label { display: block; }
+
+.stroke-text__svg {
+  display: block;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.stroke-text__stroke,
+.stroke-text__fill {
+  user-select: none;
+  white-space: pre;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: 1em;
+  letter-spacing: inherit;
+}
+
+.stroke-text__stroke {
+  fill: none;
+  stroke: var(--accent);
+}
+
+.stroke-text__fill {
+  fill: var(--text-strong);
+  stroke: none;
+}
 
 .close .section-lead { max-width: 46ch; }
 

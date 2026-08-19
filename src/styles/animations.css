@@ -62,6 +62,19 @@ html.w-mod-js .line-draw {
   transition: clip-path var(--duration-slow) var(--ease-out-expo);
 }
 
+html.w-mod-js .stroke-text:not(.is-ready):not(.stroke-text--static) .stroke-text__label {
+  visibility: hidden;
+}
+
+html.w-mod-js .stroke-text.is-ready .stroke-text__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 html.w-mod-js .perspective-load.is-revealed {
   transform: translate3d(0, 0, 0) rotateX(0deg);
   opacity: 1;
@@ -136,4 +149,17 @@ html.w-mod-js .line-draw.is-revealed { clip-path: inset(0 0 0 0); }
     transition: none;
     will-change: auto;
   }
+
+  html.w-mod-js .stroke-text .stroke-text__label,
+  html.w-mod-js .stroke-text.is-ready .stroke-text__label {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    visibility: visible;
+  }
+
+  html.w-mod-js .stroke-text__svg { display: none; }
 }
