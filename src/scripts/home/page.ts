@@ -1,4 +1,5 @@
 import { initCursor, initHeroParallax } from './cursor';
+import { initNavMenu } from './menu';
 import { initSpecularButtons } from './specular';
 import { initStrokeText } from './stroke-text';
 import { initHeroThreads } from './threads';
@@ -141,7 +142,9 @@ function navAutoHide() {
 			ticking = true;
 			requestAnimationFrame(() => {
 				const y = window.scrollY;
-				if (y < 64) nav.classList.remove('is-away');
+				if (nav.classList.contains('is-open')) {
+					nav.classList.remove('is-away');
+				} else if (y < 64) nav.classList.remove('is-away');
 				else if (y > last + 8) nav.classList.add('is-away');
 				else if (y < last - 8) nav.classList.remove('is-away');
 				last = y;
@@ -289,6 +292,7 @@ export function initHome(): void {
 	}
 
 	initStrokeText();
+	initNavMenu();
 	accordion();
 	copyTokens();
 	dismissBanner();
