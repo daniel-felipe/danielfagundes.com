@@ -1,4 +1,3 @@
-import { initCursor, initHeroParallax } from './cursor';
 import { initNavMenu } from './menu';
 import { initSpecularButtons } from './specular';
 import { initStrokeText } from './stroke-text';
@@ -298,12 +297,14 @@ export function initHome(): void {
 	} else {
 		heroIntro();
 		scrollReveal();
-		initHeroParallax();
 		initSpecularButtons();
 		navAutoHide();
 		marqueePause();
-		initCursor();
 		whenIdle(() => {
+			void import('./cursor').then((mod) => {
+				mod.initHeroParallax();
+				mod.initCursor();
+			});
 			void import('./threads').then((mod) => mod.initHeroThreads());
 		});
 	}
