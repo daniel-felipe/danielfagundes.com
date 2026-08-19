@@ -1,5 +1,6 @@
 import { initCursor, initHeroParallax } from './cursor';
 import { initSpecularButtons } from './specular';
+import { initStrokeText } from './stroke-text';
 import { initHeroThreads } from './threads';
 
 const REVEAL_SEL = '.fade-up, .fade-in, .perspective-load, .scale-in, .line-draw';
@@ -283,6 +284,7 @@ export function initHome(): void {
 		initCursor();
 	}
 
+	initStrokeText();
 	accordion();
 	copyTokens();
 	dismissBanner();
