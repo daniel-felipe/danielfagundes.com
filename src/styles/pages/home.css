@@ -37,9 +37,6 @@
   padding-right: max(var(--padding-container), env(safe-area-inset-right));
 }
 
-/* Two essential links fit a phone bar; keep them visible when the library hides menus. */
-.navbar .nav-menu { display: flex; }
-
 .brand {
   min-height: 44px;
   display: inline-flex;
@@ -306,6 +303,10 @@ footer[id] {
 
   /* Three cards: avoid a 2+1 widow on tablet. */
   #ferramentas .grid.cols-3 { grid-template-columns: minmax(0, 1fr); }
+
+  .nav-menu-foot .button-primary {
+    min-width: 12rem;
+  }
 }
 
 /* Phone: stacked hierarchy, thumb-sized controls, no leftover desktop columns. */
@@ -322,25 +323,18 @@ footer[id] {
 
   .brand { font-size: 1rem; }
 
-  .nav-menu { gap: .55rem; }
-
-  .nav-link.nav-optional { display: none; }
-
-  .nav-link {
-    height: auto;
-    min-height: 44px;
-    overflow: visible;
-    display: inline-flex;
-    align-items: center;
-    padding: 0 .45rem;
-    letter-spacing: .06em;
+  .nav-menu {
+    padding-left: max(1.75rem, env(safe-area-inset-left));
+    padding-right: max(1.75rem, env(safe-area-inset-right));
   }
 
-  .nav-link-text.absolute { display: none; }
+  .nav-menu-foot {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-  .theme-toggle {
-    width: 44px;
-    height: 44px;
+  .nav-menu-foot .button-primary {
+    width: 100%;
   }
 
   .main-section.tight {
@@ -450,14 +444,5 @@ footer[id] {
 
   .brand {
     min-width: 0;
-    font-size: .875rem;
-  }
-
-  .nav-menu { gap: .25rem; }
-
-  .nav-link {
-    font-size: 12px;
-    padding: 0 .25rem;
-    letter-spacing: .05em;
   }
 }
