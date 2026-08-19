@@ -610,10 +610,13 @@ a.work-link:focus-visible .work-arrow { transform: rotate(0deg) translate3d(6px,
 /* ---------- form controls — You X, recoloured for the dark shell ---------- */
 .input,
 .text-area {
+  appearance: none;
   width: 100%;
+  margin: 0;
   border: 1px solid var(--border);
   background-color: var(--surface-1);
   color: var(--text-strong);
+  caret-color: var(--accent);
   font-family: var(--font-ui);
   font-size: var(--ui-body);
   line-height: 1em;
@@ -630,7 +633,17 @@ a.work-link:focus-visible .work-arrow { transform: rotate(0deg) translate3d(6px,
 .text-area:hover { border-color: var(--text-muted); }
 
 .input:focus,
-.text-area:focus { outline: none; border-color: var(--accent); }
+.text-area:focus,
+.input:focus-visible,
+.text-area:focus-visible { outline: none; border-color: var(--accent); }
+
+.input:-webkit-autofill,
+.text-area:-webkit-autofill {
+  -webkit-text-fill-color: var(--text-strong);
+  caret-color: var(--accent);
+  box-shadow: 0 0 0 1000px var(--surface-1) inset;
+  transition: background-color 9999s ease-out;
+}
 
 .field { display: flex; flex-direction: column; gap: 10px; }
 .field-label { font-family: var(--font-ui); font-size: var(--ui-body-s); font-weight: var(--weight-700); letter-spacing: .06em; text-transform: uppercase; color: var(--text-strong); }
