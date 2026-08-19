@@ -52,10 +52,10 @@ export function initCursor(): void {
 		if (arrow) gsap.to(arrow, { opacity: 0, scale: 0.2, duration: dur, ease, overwrite: 'auto' });
 	}
 
-	const targets = 'a, button, .project-item, .service-row, .work-item, .swatch-chip';
+	const targets = 'a, button, .service-row, .work-item';
 	document.querySelectorAll<HTMLElement>(targets).forEach((el) => {
 		el.addEventListener('mouseenter', () => {
-			if (el.matches('a, .brand, .project-item, .work-item')) showArrow();
+			if (el.matches('a, .brand, .work-item')) showArrow();
 			else swell();
 		});
 		el.addEventListener('mouseleave', rest);

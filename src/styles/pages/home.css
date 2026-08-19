@@ -304,8 +304,6 @@ html[data-theme-switching] .hero-copy::before {
 
 /* Tablet: keep the editorial split, tighten the first fold a little. */
 @media (max-width: 991px) {
-  .navbar .button-sticky { display: none; }
-
   .hero {
     min-height: 100svh;
     min-height: 100dvh;

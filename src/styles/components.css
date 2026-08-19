@@ -287,83 +287,9 @@ html.nav-open { overflow: hidden; }
   z-index: 2;
 }
 
-/* Kitpro's floating pill, kept small so it can sit over content. */
-.button-sticky {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--gap-button);
-  border-radius: max(6px, .5vw);
-  padding: max(8px, .65vw) max(14px, 1.2vw);
-  background-color: var(--text-strong);
-  color: var(--bg);
-  font-family: var(--font-ui);
-  font-size: var(--ui-body-s);
-  font-weight: var(--weight-600);
-  cursor: pointer;
-  touch-action: manipulation;
-  transition: background-color var(--duration-fast) var(--ease-out-expo), color var(--duration-fast) var(--ease-out-expo);
-}
-
-.button-sticky.v2 { background-color: var(--bg); color: var(--text-strong); border: 1px solid var(--border); }
-@media (hover: hover) and (pointer: fine) {
-  .button-sticky:hover { background-color: var(--accent); color: var(--accent-ink); }
-}
-.button-sticky:active { background-color: var(--accent); color: var(--accent-ink); }
-
-.icon-button {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 2.6vw;
-  height: 2.6vw;
-  min-width: 34px;
-  min-height: 34px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  background-color: var(--surface-2);
-  color: var(--text-strong);
-  cursor: pointer;
-  transition: background-color var(--duration-fast) var(--ease-out-expo), transform var(--duration-fast) var(--ease-out-expo);
-}
-
-.icon-button:hover { background-color: var(--accent); color: var(--accent-ink); transform: rotate(45deg); }
-.icon-button.reverse:hover { transform: rotate(-45deg); }
-.icon-button svg { width: 46%; height: 46%; }
-
-/* Several source marks (close.svg, the Az Artful logo and the rotating
-   badge) ship with a hardcoded black fill and would vanish on the dark
-   shell, so they are inverted rather than recoloured. */
-.wrapper-close img,
-.mark-inverted { filter: invert(var(--mark-invert)); }
-
-/* You X quick checkout row. */
-.quick-checkout {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  border: 1px solid var(--border);
-  border-radius: 500px;
-  padding: 14px 28px;
-  background-color: var(--paper);
-  color: var(--paper-text-strong);
-  font-family: var(--font-ui);
-  font-size: 16px;
-  font-weight: var(--weight-700);
-  cursor: pointer;
-  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
-}
-
-.quick-checkout:hover { border-color: var(--paper-text-strong); box-shadow: var(--shadow-md); }
-.quick-checkout img { width: 16px; height: 16px; }
-
-/* ---------- tags & badges ---------- */
-/* All three chips are inline-flex, so a flex column parent would stretch
-   them edge to edge without an explicit cross-axis alignment. */
+/* ---------- tags ---------- */
 .tag-service,
-.tag-company,
-.badge-home { align-self: flex-start; }
+.tag-company { align-self: flex-start; }
 
 .tag-service {
   display: inline-flex;
@@ -395,26 +321,6 @@ html.nav-open { overflow: hidden; }
 /* The 0.3vw square Kitpro uses as a bullet before eyebrow copy. */
 .square-tag { aspect-ratio: 1; width: .3vw; min-width: 5px; background-color: var(--accent); }
 
-.badge-home {
-  display: inline-flex;
-  align-items: center;
-  border: 1px solid var(--paper-border);
-  border-radius: 50px;
-  padding: 14px 22px;
-  background-color: var(--paper);
-  color: var(--paper-text-strong);
-  font-family: var(--font-ui);
-  font-size: 16px;
-  font-weight: var(--weight-700);
-  line-height: 18px;
-  box-shadow: var(--shadow-md);
-}
-
-.badge-home.accent { background-color: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-.badge-home.ice { background-color: var(--secondary-ice); border-color: var(--secondary-ice); }
-.badge-home.sand { background-color: var(--secondary-sand); border-color: var(--secondary-sand); }
-.badge-home.lilac { background-color: var(--secondary-lilac); border-color: var(--secondary-lilac); }
-
 /* ---------- cards ---------- */
 .card {
   border-radius: var(--radius-card);
@@ -424,76 +330,20 @@ html.nav-open { overflow: hidden; }
   overflow: hidden;
 }
 
-.grid > .card,
-.grid > .card-career { height: 100%; }
+.grid > .card { height: 100%; }
 
-.card.dark { background-color: var(--border); color: var(--text); }
-.card.outline { background-color: #0000; border: 1px solid var(--border); }
+.card.outline { background-color: #0000; border: 1px solid var(--border); color: var(--text); }
 .card.padded { padding: 40px; }
-.card.blog-card { display: flex; flex-direction: column; min-height: 100%; border: 1px solid var(--border); }
-.card.blog-card .card-body { padding: 32px; }
-.card.testimonial-card { border-radius: 24px; padding: 40px; }
-.card.service-card { display: flex; align-items: flex-start; gap: 20px; padding: 48px 48px 48px 40px; }
-
-/* The source service icons are white-stroked SVGs, so on a paper card
-   they need the dark chip they sit on in the original layout. */
-.service-icon { flex: 0 0 auto; width: 72px; height: 72px; padding: 16px; border-radius: var(--radius-card); background-color: var(--color-bg-section); }
 
 .card h4, .card h5 { font-family: var(--font-ui); }
 
-/* Cards on a paper surface flip the whole text stack to the dark neutrals. */
-.card:not(.dark):not(.outline) { color: var(--paper-text); }
-.card:not(.dark):not(.outline) h4,
-.card:not(.dark):not(.outline) h5,
-.card:not(.dark):not(.outline) .spec-label { color: var(--paper-text-strong); }
-.card:not(.dark):not(.outline) .spec { color: var(--paper-text); }
+.card:not(.outline) { color: var(--paper-text); }
+.card:not(.outline) h4,
+.card:not(.outline) h5,
+.card:not(.outline) .spec-label { color: var(--paper-text-strong); }
+.card:not(.outline) .spec { color: var(--paper-text); }
 
-.card.dark h4, .card.dark h5,
 .card.outline h4, .card.outline h5 { color: var(--text-strong); }
-.card.outline { color: var(--text); }
-
-/* Kitpro career card: fluid box, dark surface, year + role + meta. */
-.card-career {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-s);
-  width: 100%;
-  min-height: var(--height-card-career);
-  padding: var(--gap-s);
-  border-radius: var(--radius-md);
-  background-color: var(--surface-3);
-  border: 1px solid var(--border);
-  position: relative;
-}
-
-.year-career { font-family: var(--font-display); font-size: var(--size-h5); font-weight: var(--weight-700); color: var(--text-strong); }
-.info-card-career { display: flex; gap: var(--gap-xxs); font-family: var(--font-ui); font-size: 13px; letter-spacing: .04em; text-transform: uppercase; opacity: .6; }
-.body-card-career { display: flex; flex-direction: column; gap: var(--gap-xxs); }
-
-/* Az Artful project tile: image zooms, white sheet wipes up, arrow slides. */
-.project-item { position: relative; display: block; width: 100%; overflow: hidden; }
-.project-item-image-holder { position: relative; overflow: hidden; border-radius: var(--radius-md); }
-.project-item-image { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform var(--duration-slow) var(--ease-out-expo); }
-@media (hover: hover) and (pointer: fine) {
-  .project-item:hover .project-item-image { transform: scale3d(1.06, 1.06, 1); }
-  .project-item:hover .project-item-image-overlay { opacity: .12; transform: translate3d(0, 0, 0); }
-}
-
-.project-item-image-overlay {
-  position: absolute;
-  inset: 0;
-  background-color: var(--text-strong);
-  opacity: 0;
-  transform: translate3d(0, 100%, 0);
-  transition: transform var(--duration-base) var(--ease-out-expo), opacity var(--duration-base) var(--ease-out-expo);
-}
-
-.project-item-content { position: relative; display: flex; justify-content: space-between; align-items: flex-start; gap: var(--gap-xs); margin-top: 1em; }
-.project-item-title { margin: 0; font-family: var(--font-display); font-size: var(--size-h6); font-weight: var(--weight-600); color: var(--text-strong); }
-.project-item-arrow { width: 22px; transform: rotate(-45deg); transition: transform var(--duration-fast) var(--ease-out-expo); }
-@media (hover: hover) and (pointer: fine) {
-  .project-item:hover .project-item-arrow { transform: rotate(0deg) translate3d(6px, -6px, 0); }
-}
 
 /* Lean work list: Kitpro numbered row + You X title/category split.
    Use when the piece has no image; the Az Artful tile stays for visual work. */
@@ -650,74 +500,6 @@ a.work-link:focus-visible .work-arrow { transform: rotate(0deg) translate3d(6px,
 
 .divider { width: 100%; height: 2px; background-color: var(--border); }
 
-/* ---------- token display ---------- */
-.swatch { display: flex; flex-direction: column; gap: 10px; cursor: pointer; }
-.swatch-chip { height: 96px; border-radius: var(--radius-md); border: 1px solid var(--swatch-border); transition: transform var(--duration-fast) var(--ease-out-expo); }
-.swatch:hover .swatch-chip { transform: translate3d(0, -6px, 0); }
-
-/* The palette chips must always paint the raw token they document, so
-   they deliberately bypass the semantic layer and never follow the theme. */
-.swatch-chip[data-token="black"] { background-color: var(--color-black); }
-.swatch-chip[data-token="bg-section"] { background-color: var(--color-bg-section); }
-.swatch-chip[data-token="surface-1"] { background-color: var(--color-surface-1); }
-.swatch-chip[data-token="surface-2"] { background-color: var(--color-surface-2); }
-.swatch-chip[data-token="surface-3"] { background-color: var(--color-surface-3); }
-.swatch-chip[data-token="dark-gray"] { background-color: var(--color-dark-gray); }
-.swatch-chip[data-token="neutral-200"] { background-color: var(--neutral-200); }
-.swatch-chip[data-token="neutral-300"] { background-color: var(--neutral-300); }
-.swatch-chip[data-token="neutral-400"] { background-color: var(--neutral-400); }
-.swatch-chip[data-token="neutral-500"] { background-color: var(--neutral-500); }
-.swatch-chip[data-token="neutral-600"] { background-color: var(--neutral-600); }
-.swatch-chip[data-token="neutral-800"] { background-color: var(--neutral-800); }
-.swatch-chip[data-token="accent-slate"] { background-color: var(--accent-slate); }
-.swatch-chip[data-token="accent-slate-bright"] { background-color: var(--accent-slate-bright); }
-.swatch-chip[data-token="secondary-ice"] { background-color: var(--secondary-ice); }
-.swatch-chip[data-token="secondary-sand"] { background-color: var(--secondary-sand); }
-.swatch-chip[data-token="secondary-sky"] { background-color: var(--secondary-sky); }
-.swatch-chip[data-token="secondary-lilac"] { background-color: var(--secondary-lilac); }
-
-.type-specimen { display: flex; flex-direction: column; gap: var(--gap-xxs); border-bottom: 1px solid var(--border); padding-bottom: var(--gap-xs); }
-.type-sample { margin: 0; color: var(--text-strong); font-family: var(--font-display); line-height: 1.05; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-/* Inside a card the specimen wraps; only the full-width ramp truncates. */
-.card .type-sample { white-space: normal; text-overflow: clip; }
-
-.type-sample[data-family="display"] { font-family: var(--font-display); }
-.type-sample[data-family="text"] { font-family: var(--font-text); }
-.type-sample[data-family="ui"] { font-family: var(--font-ui); }
-.type-sample[data-family="mono"] { font-family: var(--font-mono); }
-
-.type-sample[data-size="xl"] { font-size: var(--size-xl); line-height: var(--height-xl); font-weight: var(--weight-700); }
-.type-sample[data-size="l"] { font-size: var(--size-l); line-height: var(--height-l); font-weight: var(--weight-300); }
-.type-sample[data-size="h1"] { font-size: var(--size-h1); line-height: var(--height-h1); font-weight: var(--weight-700); }
-.type-sample[data-size="h2"] { font-size: var(--size-h2); font-weight: var(--weight-600); }
-.type-sample[data-size="h3"] { font-size: var(--size-h3); font-weight: var(--weight-600); }
-.type-sample[data-size="h4"] { font-size: var(--size-h4); font-weight: var(--weight-500); }
-.type-sample[data-size="h5"] { font-size: var(--size-h5); font-weight: var(--weight-500); }
-.type-sample[data-size="ui-body-l"] { font-family: var(--font-ui); font-size: var(--ui-body-l); line-height: 1.818em; }
-.type-sample[data-size="ui-body"] { font-family: var(--font-ui); font-size: var(--ui-body); font-weight: var(--weight-500); line-height: 1.777em; }
-.type-sample[data-size="ui-body-s"] { font-family: var(--font-ui); font-size: var(--ui-body-s); line-height: 1.6em; }
-
-.scale-bar { height: 14px; border-radius: var(--radius-sm); background-color: var(--accent); }
-.scale-bar[data-scale="button"] { width: var(--gap-button); }
-.scale-bar[data-scale="xxs"] { width: var(--gap-xxs); }
-.scale-bar[data-scale="xs"] { width: var(--gap-xs); }
-.scale-bar[data-scale="s"] { width: var(--gap-s); }
-.scale-bar[data-scale="ml"] { width: var(--gap-ml); }
-.scale-bar[data-scale="xl"] { width: var(--gap-xl); }
-
-.radius-box { height: 96px; border: 1px dashed var(--border); background-color: var(--surface-2); }
-.radius-box[data-radius="sm"] { border-radius: var(--radius-sm); }
-.radius-box[data-radius="md"] { border-radius: var(--radius-md); }
-.radius-box[data-radius="card"] { border-radius: var(--radius-card); }
-.radius-box[data-radius="pill"] { border-radius: var(--radius-pill); }
-
-.card[data-shadow="sm"] { box-shadow: var(--shadow-sm); }
-.card[data-shadow="md"] { box-shadow: var(--shadow-md); }
-.card[data-shadow="lg"] { box-shadow: var(--shadow-lg); }
-
-.avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
-
 /* ---------- marquee — Az Artful ---------- */
 .marquee { display: flex; overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: var(--gap-xs) 0; }
 .marquee-track { display: flex; flex: 0 0 auto; gap: var(--gap-ml); padding-right: var(--gap-ml); animation: marquee-scroll 18s linear infinite; }
@@ -779,7 +561,6 @@ a.work-link:focus-visible .work-arrow { transform: rotate(0deg) translate3d(6px,
 @media (max-width: 991px) {
   .button-primary,
   .button-secondary { padding: 16px 28px; min-height: 52px; }
-  .card.service-card { padding: 32px; }
   .card.padded { padding: 28px; }
   .marquee-text { font-size: 10vw; }
 
