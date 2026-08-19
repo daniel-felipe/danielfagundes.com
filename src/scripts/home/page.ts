@@ -2,7 +2,6 @@ import { initCursor, initHeroParallax } from './cursor';
 import { initNavMenu } from './menu';
 import { initSpecularButtons } from './specular';
 import { initStrokeText } from './stroke-text';
-import { initHeroThreads } from './threads';
 
 const REVEAL_SEL = '.fade-up, .fade-in, .perspective-load, .scale-in, .line-draw';
 
@@ -283,6 +282,14 @@ function navCurrent() {
 	});
 }
 
+function whenIdle(run: () => void) {
+	if ('requestIdleCallback' in window) {
+		window.requestIdleCallback(run, { timeout: 1500 });
+		return;
+	}
+	window.setTimeout(run, 1);
+}
+
 export function initHome(): void {
 	const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -292,11 +299,13 @@ export function initHome(): void {
 		heroIntro();
 		scrollReveal();
 		initHeroParallax();
-		initHeroThreads();
 		initSpecularButtons();
 		navAutoHide();
 		marqueePause();
 		initCursor();
+		whenIdle(() => {
+			void import('./threads').then((mod) => mod.initHeroThreads());
+		});
 	}
 
 	initStrokeText();
