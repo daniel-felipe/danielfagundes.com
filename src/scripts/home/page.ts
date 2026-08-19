@@ -1,6 +1,4 @@
 import { initNavMenu } from './menu';
-import { initSpecularButtons } from './specular';
-import { initStrokeText } from './stroke-text';
 
 const REVEAL_SEL = '.fade-up, .fade-in, .perspective-load, .scale-in, .line-draw';
 
@@ -281,12 +279,28 @@ function navCurrent() {
 	});
 }
 
-function whenIdle(run: () => void) {
-	if ('requestIdleCallback' in window) {
-		window.requestIdleCallback(run, { timeout: 1500 });
-		return;
-	}
-	window.setTimeout(run, 1);
+function afterLoadIdle(run: () => void, timeout = 4000) {
+	const kick = () => {
+		if ('requestIdleCallback' in window) {
+			window.requestIdleCallback(run, { timeout });
+			return;
+		}
+		window.setTimeout(run, timeout);
+	};
+	if (document.readyState === 'complete') kick();
+	else window.addEventListener('load', kick, { once: true });
+}
+
+function onFirstInput(run: () => void) {
+	let started = false;
+	const kick = () => {
+		if (started) return;
+		started = true;
+		run();
+	};
+	window.addEventListener('pointermove', kick, { once: true, passive: true });
+	window.addEventListener('pointerdown', kick, { once: true, passive: true });
+	window.addEventListener('keydown', kick, { once: true });
 }
 
 export function initHome(): void {
@@ -294,22 +308,27 @@ export function initHome(): void {
 
 	if (reduced) {
 		revealAll();
+		document.querySelectorAll('[data-stroke-text]').forEach((root) => {
+			root.classList.add('stroke-text--static');
+		});
 	} else {
 		heroIntro();
 		scrollReveal();
-		initSpecularButtons();
 		navAutoHide();
 		marqueePause();
-		whenIdle(() => {
+		afterLoadIdle(() => {
+			void import('./threads').then((mod) => mod.initHeroThreads());
+			void import('./stroke-text').then((mod) => mod.initStrokeText());
+		}, 8000);
+		onFirstInput(() => {
 			void import('./cursor').then((mod) => {
 				mod.initHeroParallax();
 				mod.initCursor();
 			});
-			void import('./threads').then((mod) => mod.initHeroThreads());
+			void import('./specular').then((mod) => mod.initSpecularButtons());
 		});
 	}
 
-	initStrokeText();
 	initNavMenu();
 	accordion();
 	copyTokens();
