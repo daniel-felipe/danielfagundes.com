@@ -7,7 +7,7 @@ export const en: HomeCopy = {
 	meta: {
 		title: 'Daniel Fagundes | Full-Stack Developer',
 		description:
-			'Full-stack developer in São João del Rei: web systems, sites, and automations with Laravel, React, and n8n. I take on projects beyond DevStats.',
+			'Full-stack developer in São João del Rei: web systems, sites, and automations with Laravel, React, and n8n.',
 		jobTitle: 'Full-Stack Developer',
 		ogImageAlt: 'Daniel Fagundes, full-stack developer',
 	},

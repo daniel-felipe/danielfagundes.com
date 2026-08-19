@@ -7,7 +7,7 @@ export const ptBr: HomeCopy = {
 	meta: {
 		title: 'Daniel Fagundes | Desenvolvedor Full-Stack',
 		description:
-			'Desenvolvedor full-stack em São João del Rei: sistemas web, sites e automações com Laravel, React e n8n. Atendo projetos além da DevStats.',
+			'Desenvolvedor full-stack em São João del Rei: sistemas web, sites e automações com Laravel, React e n8n.',
 		jobTitle: 'Desenvolvedor Full-Stack',
 		ogImageAlt: 'Daniel Fagundes, desenvolvedor full-stack',
 	},
