@@ -23,6 +23,9 @@ export default defineConfig({
 			prefixDefaultLocale: false,
 		},
 	},
+	build: {
+		inlineStylesheets: 'always',
+	},
 	vite: {
 		build: {
 			rollupOptions: {

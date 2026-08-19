@@ -48,9 +48,9 @@
 
   /* families */
   --font-display: Manrope, sans-serif;
-  --font-text: "Open Sans", sans-serif;
-  --font-ui: Satoshi, "DM Sans", sans-serif;
-  --font-mono: "DM Sans", ui-monospace, monospace;
+  --font-text: "Open Sans", system-ui, sans-serif;
+  --font-ui: Satoshi, system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
 
   /* weights */
   --weight-200: 200;
@@ -132,12 +132,6 @@
   --duration-base: .6s;
   --duration-slow: .8s;
 
-  /* component metrics — Kitpro Dario */
-  --width-card-work: 27vw;
-  --height-card-work: 34vw;
-  --width-card-career: 28vw;
-  --height-card-career: 24vw;
-  --size-image-service: 5vw;
 }
 
 /* Semantic layer — dark is the shell the three sources were rebuilt into,
@@ -168,8 +162,6 @@
 
   --cursor-strong: #dadadacc;
   --cursor-soft: #dadada33;
-  --swatch-border: #ffffff1a;
-  --mark-invert: 1;
 }
 
 [data-theme="light"] {
@@ -194,6 +186,4 @@
 
   --cursor-strong: #14142b8c;
   --cursor-soft: #14142b33;
-  --swatch-border: #14142b1f;
-  --mark-invert: 0;
 }
