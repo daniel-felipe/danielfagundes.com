@@ -1,32 +1,8 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/home/Navbar.astro';
-import Hero from '../components/home/Hero.astro';
-import Marquee from '../components/home/Marquee.astro';
-import Projects from '../components/home/Projects.astro';
-import Services from '../components/home/Services.astro';
-import Tools from '../components/home/Tools.astro';
-import Faq from '../components/home/Faq.astro';
-import ContactFooter from '../components/home/ContactFooter.astro';
-import CustomCursor from '../components/home/CustomCursor.astro';
-import { site } from '../data/home';
-import '../styles/pages/home.css';
+import HomePage from '../components/home/HomePage.astro';
+import { getHome } from '../data/home';
+
+const copy = getHome('pt-br');
 ---
 
-<Layout title={site.title} description={site.description}>
-	<Navbar />
-	<Hero />
-	<Marquee />
-	<Projects />
-	<Services />
-	<Tools />
-	<Faq />
-	<ContactFooter />
-	<CustomCursor />
-</Layout>
-
-<script>
-	import { initHome } from '../scripts/home/page';
-
-	initHome();
-</script>
+<HomePage locale="pt-br" copy={copy} />

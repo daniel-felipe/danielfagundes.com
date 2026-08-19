@@ -1,0 +1,39 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from './Navbar.astro';
+import Hero from './Hero.astro';
+import Marquee from './Marquee.astro';
+import Projects from './Projects.astro';
+import Services from './Services.astro';
+import Tools from './Tools.astro';
+import Faq from './Faq.astro';
+import ContactFooter from './ContactFooter.astro';
+import CustomCursor from './CustomCursor.astro';
+import type { HomeCopy, Locale } from '../../data/home';
+import '../../styles/pages/home.css';
+
+interface Props {
+	locale: Locale;
+	copy: HomeCopy;
+}
+
+const { locale, copy } = Astro.props;
+---
+
+<Layout title={copy.meta.title} description={copy.meta.description} htmlLang={copy.htmlLang}>
+	<Navbar locale={locale} copy={copy} />
+	<Hero copy={copy} />
+	<Marquee items={copy.marquee} />
+	<Projects copy={copy} />
+	<Services copy={copy} />
+	<Tools copy={copy} />
+	<Faq copy={copy} />
+	<ContactFooter copy={copy} />
+	<CustomCursor />
+</Layout>
+
+<script>
+	import { initHome } from '../../scripts/home/page';
+
+	initHome();
+</script>

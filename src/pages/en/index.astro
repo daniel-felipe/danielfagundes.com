@@ -1,0 +1,8 @@
+---
+import HomePage from '../../components/home/HomePage.astro';
+import { getHome } from '../../data/home';
+
+const copy = getHome('en');
+---
+
+<HomePage locale="en" copy={copy} />
