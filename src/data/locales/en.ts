@@ -7,7 +7,9 @@ export const en: HomeCopy = {
 	meta: {
 		title: 'Daniel Fagundes | Full-Stack Developer',
 		description:
-			'Daniel Fagundes, full-stack developer and software engineer at DevStats. Web systems with Laravel, React, Python, and applied AI.',
+			'Full-stack developer in São João del Rei: web systems, sites, and automations with Laravel, React, and n8n. I take on projects beyond DevStats.',
+		jobTitle: 'Full-Stack Developer',
+		ogImageAlt: 'Daniel Fagundes, full-stack developer',
 	},
 	nav: {
 		skipToContent: 'Skip to content',
@@ -27,7 +29,7 @@ export const en: HomeCopy = {
 		firstName: 'Daniel',
 		lastName: 'Fagundes',
 		p1: "Hi, I'm Daniel. I'm a full-stack developer and software engineer at DevStats. Day to day, I build web systems with Laravel and React.",
-		p2: 'Outside of work, I ship my own projects and explore topics that catch my curiosity — data, AI, and cybersecurity — using tools like Python.',
+		p2: 'Outside of work, I take on my own projects and explore topics that catch my curiosity — data, AI, and cybersecurity — using tools like Python.',
 		workLink: "Take a look at what I've built.",
 		contactCta: 'Get in touch',
 		githubCta: 'GitHub',
@@ -116,17 +118,23 @@ export const en: HomeCopy = {
 		items: [
 			{
 				question: 'Do you take on projects outside your work at DevStats?',
-				answer: 'Yes, I do.',
+				answer:
+					'Yes. I stay at DevStats and, in parallel, take on my own projects, with a schedule that does not compete with the day job. If it is a fit, I reply with a diagnosis and a next step.',
 			},
 			{
 				question: 'What kind of projects do you take?',
 				answer:
-					'Landing pages and institutional sites, web systems, data analysis, and automations.',
+					'Landing pages and institutional sites, web systems (such as the Camarão Prime e-commerce), data analysis, and n8n automations. I also maintain and integrate APIs on systems already in production.',
 			},
 			{
 				question: 'How does pricing work?',
 				answer:
-					'After I understand what you need, I send a fixed quote — no surprises along the way.',
+					'After I understand what you need, I send a fixed quote — no surprises along the way. Start with a message: describe the project and I will come back with scope, timeline, and price.',
+			},
+			{
+				question: 'Do you work remotely, or only in São João del Rei?',
+				answer:
+					'I work remotely and also on projects in the São João del Rei and Santa Cruz de Minas area, where work like Petbull and CS Barber comes from. The format depends on what the project needs.',
 			},
 		],
 	},

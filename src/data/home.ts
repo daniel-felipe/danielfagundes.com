@@ -50,6 +50,8 @@ export interface HomeCopy {
 	meta: {
 		title: string;
 		description: string;
+		jobTitle: string;
+		ogImageAlt: string;
 	};
 	nav: {
 		skipToContent: string;

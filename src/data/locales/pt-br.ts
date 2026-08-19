@@ -5,9 +5,11 @@ export const ptBr: HomeCopy = {
 	email: 'contato@danielfagundes.com',
 	github: 'https://github.com/daniel-felipe',
 	meta: {
-		title: 'Daniel Fagundes | Full-Stack Developer',
+		title: 'Daniel Fagundes | Desenvolvedor Full-Stack',
 		description:
-			'Daniel Fagundes, desenvolvedor Full-Stack e engenheiro de software na DevStats. Sistemas web com Laravel, React, Python e IA aplicada.',
+			'Desenvolvedor full-stack em São João del Rei: sistemas web, sites e automações com Laravel, React e n8n. Atendo projetos além da DevStats.',
+		jobTitle: 'Desenvolvedor Full-Stack',
+		ogImageAlt: 'Daniel Fagundes, desenvolvedor full-stack',
 	},
 	nav: {
 		skipToContent: 'Pular para o conteúdo',
@@ -27,7 +29,7 @@ export const ptBr: HomeCopy = {
 		firstName: 'Daniel',
 		lastName: 'Fagundes',
 		p1: 'Olá, eu sou o Daniel. Sou desenvolvedor Full-Stack e engenheiro de software na DevStats. No dia a dia, construo sistemas web com Laravel e React.',
-		p2: 'Fora do trabalho, crio projetos próprios e exploro temas que me despertam curiosidade, como dados, IA e cibersegurança, utilizando tecnologias como Python.',
+		p2: 'Fora do trabalho, atendo projetos próprios e exploro temas que me despertam curiosidade, como dados, IA e cibersegurança, utilizando tecnologias como Python.',
 		workLink: 'Dê uma olhada no que já construí.',
 		contactCta: 'Entrar em contato',
 		githubCta: 'GitHub',
@@ -112,21 +114,27 @@ export const ptBr: HomeCopy = {
 		],
 	},
 	faq: {
-		title: 'FAQ',
+		title: 'Perguntas frequentes',
 		items: [
 			{
 				question: 'Você atende projetos fora do seu trabalho na DevStats?',
-				answer: 'Sim, atendo.',
+				answer:
+					'Sim. Continuo na DevStats e, em paralelo, aceito projetos próprios, com agenda combinada para não competir com o expediente. Se fizer sentido, respondo com um diagnóstico e o próximo passo.',
 			},
 			{
 				question: 'Que tipo de projeto você aceita?',
 				answer:
-					'Landing pages e sites institucionais, criação de sistemas web, análise de dados e automações.',
+					'Landing pages e sites institucionais, sistemas web (como o e-commerce da Camarão Prime), análise de dados e automações com n8n. Também faço manutenção e integração de APIs em sistemas que já estão no ar.',
 			},
 			{
 				question: 'Como funciona o orçamento?',
 				answer:
-					'Depois de entender o que você precisa, envio um orçamento fechado, sem surpresa no meio do caminho.',
+					'Depois de entender o que você precisa, envio um orçamento fechado, sem surpresa no meio do caminho. O ponto de partida é o contato: descreva o projeto e eu retorno com o que dá para fazer, prazo e valor.',
+			},
+			{
+				question: 'Você atende remoto ou só em São João del Rei?',
+				answer:
+					'Atendo remoto e também projetos na região de São João del Rei e Santa Cruz de Minas, de onde vêm trabalhos como Petbull e CS Barber. O formato depende do que o projeto precisa.',
 			},
 		],
 	},
