@@ -16,6 +16,10 @@
 (function () {
   var KEY = 'ds-theme';
   var root = document.documentElement;
+  // Matches --duration-fast plus a couple of frames so backdrop-filter
+  // on .hero-copy::before is not composited over a mid-interpolation shell.
+  var SWITCH_MS = 350;
+  var switchTimer;
 
   function stored() {
     try { return localStorage.getItem(KEY); } catch (e) { return null; }
@@ -25,7 +29,15 @@
     return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
   }
 
-  function apply(theme) {
+  function apply(theme, animate) {
+    if (animate) {
+      root.setAttribute('data-theme-switching', '');
+      if (switchTimer) clearTimeout(switchTimer);
+      switchTimer = setTimeout(function () {
+        root.removeAttribute('data-theme-switching');
+        switchTimer = 0;
+      }, SWITCH_MS);
+    }
     root.setAttribute('data-theme', theme);
     var toggle = document.querySelector('[data-theme-toggle]');
     if (!toggle) return;
@@ -43,7 +55,7 @@
     if (toggle) {
       toggle.addEventListener('click', function () {
         var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        apply(next);
+        apply(next, true);
         try { localStorage.setItem(KEY, next); } catch (e) {}
       });
     }
@@ -51,7 +63,7 @@
     // Follow the system only while the visitor has not made a choice.
     if (!window.matchMedia) return;
     var query = window.matchMedia('(prefers-color-scheme: light)');
-    var onChange = function () { if (!stored()) apply(systemTheme()); };
+    var onChange = function () { if (!stored()) apply(systemTheme(), true); };
     if (query.addEventListener) query.addEventListener('change', onChange);
     else if (query.addListener) query.addListener(onChange);
   }

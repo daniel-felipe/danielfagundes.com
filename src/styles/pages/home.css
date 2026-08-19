@@ -142,18 +142,28 @@ footer[id] {
   z-index: -1;
   pointer-events: none;
   inset: -1.6rem -2.1rem -1.3rem -1.4rem;
-  background: color-mix(in srgb, var(--bg) 52%, transparent);
+  background-color: color-mix(in srgb, var(--bg) 52%, transparent);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   -webkit-mask-image: radial-gradient(ellipse 82% 78% at 22% 36%, #000 36%, transparent 74%);
   mask-image: radial-gradient(ellipse 82% 78% at 22% 36%, #000 36%, transparent 74%);
+  /* Keep the frost in step with body { background-color }, otherwise
+     --bg snaps while the page is still interpolating and the blob reads
+     as a dark/light smudge. Backdrop-filter itself cannot interpolate
+     with the shell — it is dropped for the swap in boot.js. */
+  transition: background-color var(--duration-fast) var(--ease-brix);
+}
+
+html[data-theme-switching] .hero-copy::before {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 @media (prefers-reduced-transparency: reduce) {
   .hero-copy::before {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
-    background: color-mix(in srgb, var(--bg) 86%, transparent);
+    background-color: color-mix(in srgb, var(--bg) 86%, transparent);
   }
 }
 
@@ -371,7 +381,7 @@ footer[id] {
     inset: -1.2rem -1.1rem -1rem -0.9rem;
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
-    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    background-color: color-mix(in srgb, var(--bg) 82%, transparent);
   }
 
   .hero-name {
