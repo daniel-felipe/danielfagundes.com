@@ -156,6 +156,16 @@ export const channels: Channel[] = [
 	{ label: 'E-mail', href: `mailto:${site.email}` },
 ];
 
+export const contact = {
+	eyebrow: 'Tem uma ideia?',
+	title: 'Vamos construir',
+	titleSoft: 'isso juntos.',
+	lead: 'Me conte o que você precisa. Eu respondo com um diagnóstico honesto, inclusive se a resposta for que você não precisa de um desenvolvedor.',
+	cta: 'Enviar mensagem',
+	name: 'Daniel Fagundes',
+	backToTop: 'Voltar ao topo',
+} as const;
+
 function padIndex(index: number): string {
 	return String(index + 1).padStart(2, '0');
 }
