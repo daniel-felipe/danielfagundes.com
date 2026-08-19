@@ -27,20 +27,20 @@ const enHref = getRelativeLocaleUrl('en');
 				))
 			}
 			<div class="nav-menu-foot">
-				<nav class="lang-switch" aria-label={copy.nav.langAria}>
+				<div class="lang-switch" role="group" aria-label={copy.nav.langAria}>
 					<a href={ptHref} aria-current={locale === 'pt-br' ? 'true' : undefined}>PT</a>
 					<span aria-hidden="true">/</span>
 					<a href={enHref} aria-current={locale === 'en' ? 'true' : undefined}>EN</a>
-				</nav>
+				</div>
 				<Button href="#contato">{copy.hero.contactCta}</Button>
 			</div>
 		</nav>
 		<div class="row tight">
-			<nav class="lang-switch nav-lang-bar" aria-label={copy.nav.langAria}>
+			<div class="lang-switch nav-lang-bar" role="group" aria-label={copy.nav.langAria}>
 				<a href={ptHref} aria-current={locale === 'pt-br' ? 'true' : undefined}>PT</a>
 				<span aria-hidden="true">/</span>
 				<a href={enHref} aria-current={locale === 'en' ? 'true' : undefined}>EN</a>
-			</nav>
+			</div>
 			<button class="theme-toggle" type="button" data-theme-toggle aria-label={copy.nav.themeToggle}>
 				<svg
 					class="icon-sun"
