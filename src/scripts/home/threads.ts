@@ -128,9 +128,9 @@ export function initHeroThreads(): void {
 	if (!hero || !host) return;
 
 	const compact = window.matchMedia('(max-width: 767px), (pointer: coarse)').matches;
-	const lineCount = compact ? 12 : 20;
-	const maxDim = compact ? 640 : 1200;
-	const frameMs = compact ? 1000 / 24 : 1000 / 30;
+	const lineCount = compact ? 8 : 12;
+	const maxDim = compact ? 480 : 720;
+	const frameMs = 1000 / 20;
 	const followMouse = window.matchMedia('(pointer: fine)').matches;
 	const yMin = compact ? 0.48 : 0.16;
 	const yMax = 0.99;
@@ -146,7 +146,7 @@ export function initHeroThreads(): void {
 			alpha: true,
 			depth: false,
 			antialias: false,
-			powerPreference: compact ? 'low-power' : 'default',
+			powerPreference: 'low-power',
 		});
 	} catch {
 		canvas.remove();
@@ -167,7 +167,7 @@ export function initHeroThreads(): void {
 	const geometry = new Triangle(gl);
 	const program = new Program(gl, {
 		vertex: vertexShader,
-		fragment: fragmentShader(lineCount, yMin, yMax, compact),
+		fragment: fragmentShader(lineCount, yMin, yMax, true),
 		transparent: true,
 		depthTest: false,
 		depthWrite: false,
