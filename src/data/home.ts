@@ -96,6 +96,14 @@ export interface HomeCopy {
 		titleSoft: string;
 		lead: string;
 		cta: string;
+		form: {
+			nameLabel: string;
+			namePlaceholder: string;
+			emailLabel: string;
+			emailPlaceholder: string;
+			messageLabel: string;
+			messagePlaceholder: string;
+		};
 		name: string;
 		backToTop: string;
 		channelsAria: string;
