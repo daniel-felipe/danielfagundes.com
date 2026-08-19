@@ -10,6 +10,7 @@ interface Props {
 
 const { service, index, viewLabel, closeLabel } = Astro.props;
 const open = Boolean(service.open);
+const panelId = `service-panel-${index}`;
 ---
 
 <div class:list={['service-item', 'fade-up', { 'is-open': open }]}>
@@ -17,6 +18,7 @@ const open = Boolean(service.open);
 		class="service-row"
 		type="button"
 		aria-expanded={open ? 'true' : 'false'}
+		aria-controls={panelId}
 		data-label-open={closeLabel}
 		data-label-closed={viewLabel}
 	>
@@ -24,7 +26,7 @@ const open = Boolean(service.open);
 		<h3 class="service-title">{service.title}</h3>
 		<span class="service-state">{open ? closeLabel : viewLabel}</span>
 	</button>
-	<div class="service-panel">
+	<div class="service-panel" id={panelId}>
 		<div>
 			<div class="service-panel-inner">
 				<p>{service.body}</p>

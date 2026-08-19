@@ -64,7 +64,11 @@
 }
 
 .spec-label {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
   font-weight: var(--weight-700);
+  line-height: inherit;
   letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--text-strong);

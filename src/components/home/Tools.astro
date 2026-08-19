@@ -19,7 +19,7 @@ const { copy } = Astro.props;
 				copy.tools.groups.map((group) => (
 					<div class="card outline padded scale-in stack tight">
 						<div class="spec">
-							<span class="spec-label">{group.label}</span>
+							<h3 class="spec-label">{group.label}</h3>
 						</div>
 						<div class="row tight">
 							{group.tags.map((tag) => (

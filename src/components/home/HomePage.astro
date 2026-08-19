@@ -20,14 +20,16 @@ interface Props {
 const { locale, copy } = Astro.props;
 ---
 
-<Layout title={copy.meta.title} description={copy.meta.description} htmlLang={copy.htmlLang}>
+<Layout locale={locale} copy={copy}>
 	<Navbar locale={locale} copy={copy} />
-	<Hero copy={copy} />
-	<Marquee items={copy.marquee} />
-	<Projects copy={copy} />
-	<Services copy={copy} />
-	<Tools copy={copy} />
-	<Faq copy={copy} />
+	<main id="content">
+		<Hero copy={copy} />
+		<Marquee items={copy.marquee} />
+		<Projects copy={copy} />
+		<Services copy={copy} />
+		<Tools copy={copy} />
+		<Faq copy={copy} />
+	</main>
 	<ContactFooter copy={copy} />
 	<CustomCursor />
 </Layout>

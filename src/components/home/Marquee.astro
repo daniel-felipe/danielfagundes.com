@@ -13,7 +13,7 @@ const { items } = Astro.props;
 		[0, 1].map(() => (
 			<div class="marquee-track">
 				{items.map((item) => (
-					<h2 class:list={['marquee-text', { outline: item.outline }]}>{item.label}</h2>
+					<p class:list={['marquee-text', { outline: item.outline }]}>{item.label}</p>
 				))}
 			</div>
 		))
