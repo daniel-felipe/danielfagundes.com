@@ -72,6 +72,7 @@ type SpecularInstance = {
 	dpr: number;
 	intensity: number;
 	thickness: number;
+	radius: number;
 };
 
 function luminance(rgb: [number, number, number]): number {
@@ -137,7 +138,7 @@ function mount(btn: HTMLElement, compact: boolean): SpecularInstance | null {
 			depth: false,
 			antialias: false,
 			premultipliedAlpha: true,
-			powerPreference: compact ? 'low-power' : 'default',
+			powerPreference: 'low-power',
 		});
 	} catch {
 		canvas.remove();
@@ -195,6 +196,7 @@ function mount(btn: HTMLElement, compact: boolean): SpecularInstance | null {
 		dpr: 1,
 		intensity: 1.2,
 		thickness: 1.15,
+		radius: 0,
 	};
 }
 
@@ -219,6 +221,10 @@ function resize(inst: SpecularInstance, compact: boolean) {
 	inst.program.uniforms.uPx.value = inst.dpr;
 	inst.program.uniforms.uBaseWidth.value = inst.dpr;
 	inst.program.uniforms.uThickness.value = inst.thickness * inst.dpr;
+	inst.radius = Math.min(
+		parseFloat(getComputedStyle(inst.btn).borderRadius) || h / 2,
+		h / 2,
+	);
 }
 
 function syncColors(
@@ -288,6 +294,7 @@ export function initSpecularButtons(): void {
 
 	const loop = (now: number) => {
 		frame = requestAnimationFrame(loop);
+		if (now - last < 1000 / 24 && last) return;
 		const dt = last ? Math.min((now - last) / 1000, 0.05) : 0;
 		last = now;
 
@@ -325,14 +332,10 @@ export function initSpecularButtons(): void {
 			const brightTarget = autoAnimate ? 1 : proximityT;
 			inst.bright += (brightTarget - inst.bright) * (1 - Math.exp(-dt * 8));
 
-			const radius = Math.min(
-				parseFloat(getComputedStyle(inst.btn).borderRadius) || inst.h / 2,
-				inst.h / 2,
-			);
+			if (!autoAnimate && inst.bright < 0.004 && brightTarget < 0.004) continue;
 
-			syncColors(inst, accent, slate);
 			inst.program.uniforms.uAngle.value = inst.angle;
-			inst.program.uniforms.uRadius.value = radius * inst.dpr;
+			inst.program.uniforms.uRadius.value = inst.radius * inst.dpr;
 			inst.program.uniforms.uIntensity.value = inst.intensity * inst.bright;
 			inst.renderer.render({ scene: inst.mesh });
 
