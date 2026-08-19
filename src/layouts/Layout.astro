@@ -16,7 +16,7 @@ const ptUrl = getAbsoluteLocaleUrl('pt-br');
 const enUrl = getAbsoluteLocaleUrl('en');
 const canonical = getAbsoluteLocaleUrl(locale);
 const siteOrigin = (Astro.site ?? new URL('https://danielfagundes.com')).origin;
-const ogImage = new URL('/og.png', siteOrigin).href;
+const ogImage = new URL('/og.jpg', Astro.url).href;
 const ogLocale = locale === 'en' ? 'en_US' : 'pt_BR';
 const ogLocaleAlternate = locale === 'en' ? 'pt_BR' : 'en_US';
 
@@ -75,6 +75,9 @@ const jsonLd = {
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<meta name="color-scheme" content="dark light" />
+		<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0c0c0c" />
+		<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f7ff" />
 		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="shortcut icon" href="/favicon.ico" />
@@ -92,6 +95,7 @@ const jsonLd = {
 		<meta property="og:locale" content={ogLocale} />
 		<meta property="og:locale:alternate" content={ogLocaleAlternate} />
 		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:type" content="image/jpeg" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
 		<meta property="og:image:alt" content={ogImageAlt} />
@@ -104,12 +108,7 @@ const jsonLd = {
 		<link rel="alternate" hreflang="en" href={enUrl} />
 		<link rel="alternate" hreflang="x-default" href={ptUrl} />
 		<title>{title}</title>
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Manrope:wght@300;500;600;700;800&family=Open+Sans:wght@400&display=swap"
-			rel="stylesheet"
-		/>
+		<link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
 		{/* Must run before paint: .w-mod-js / theme to avoid flash */}
 		<script is:inline src="/scripts/boot.js"></script>
 		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
