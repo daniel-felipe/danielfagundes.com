@@ -262,6 +262,8 @@ footer[id] {
 
 .close .section-lead { max-width: 46ch; }
 
+.contact-form { width: 100%; }
+
 .close-channels {
   color: var(--text-muted);
 }
@@ -407,6 +409,8 @@ footer[id] {
     width: 100%;
     justify-content: center;
   }
+
+  .contact-form .close-actions { max-width: none; }
 
   .close-title {
     font-size: clamp(2.15rem, 11.5vw, 3rem);
