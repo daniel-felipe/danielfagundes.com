@@ -4,7 +4,8 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://danielfagundes.com',
+	// Must be the live origin: static `og:image` URLs are baked from this at build time.
+	site: 'https://danielfagundes.vercel.app',
 	integrations: [
 		sitemap({
 			i18n: {

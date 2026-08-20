@@ -16,8 +16,8 @@ const htmlLang = copy.htmlLang;
 const ptUrl = getAbsoluteLocaleUrl('pt-br');
 const enUrl = getAbsoluteLocaleUrl('en');
 const canonical = getAbsoluteLocaleUrl(locale);
-const siteOrigin = (Astro.site ?? new URL('https://danielfagundes.com')).origin;
-const ogImage = new URL('/og.jpg', Astro.url).href;
+const siteOrigin = (Astro.site ?? new URL('https://danielfagundes.vercel.app')).origin;
+const ogImage = new URL('/og.jpg', siteOrigin).href;
 const ogLocale = locale === 'en' ? 'en_US' : 'pt_BR';
 const ogLocaleAlternate = locale === 'en' ? 'pt_BR' : 'en_US';
 
