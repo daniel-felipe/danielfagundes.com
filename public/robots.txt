@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://danielfagundes.vercel.app/sitemap-index.xml
+Sitemap: https://danielfagundes.com/sitemap-index.xml
