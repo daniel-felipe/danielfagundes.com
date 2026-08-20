@@ -7,6 +7,7 @@ interface Props {
 }
 
 const { copy } = Astro.props;
+const form = copy.contact.form;
 ---
 
 <footer class="main-section close" id="contato">
@@ -24,43 +25,64 @@ const { copy } = Astro.props;
 		<p class="section-lead fade-up">
 			{copy.contact.lead}
 		</p>
-		<form class="contact-form stack" data-static method="post" onsubmit="return false">
+		<form
+			class="contact-form stack"
+			data-contact-form
+			data-lang={copy.htmlLang}
+			data-msg-name-required={form.nameRequired}
+			data-msg-email-invalid={form.emailInvalid}
+			data-msg-message-required={form.messageRequired}
+			data-msg-network={form.networkError}
+			data-label-sending={form.sending}
+			method="post"
+			novalidate
+			onsubmit="return false"
+		>
 			<div class="grid cols-2">
 				<div class="field fade-up">
-					<label class="field-label" for="contact-name">{copy.contact.form.nameLabel}</label>
+					<label class="field-label" for="contact-name">{form.nameLabel}</label>
 					<input
 						class="input"
 						id="contact-name"
-						name="name"
+						name="nome"
 						type="text"
 						autocomplete="name"
-						placeholder={copy.contact.form.namePlaceholder}
+						aria-required="true"
+						aria-describedby="contact-name-error"
+						placeholder={form.namePlaceholder}
 					/>
+					<p class="field-error" id="contact-name-error" hidden></p>
 				</div>
 				<div class="field fade-up">
-					<label class="field-label" for="contact-email">{copy.contact.form.emailLabel}</label>
+					<label class="field-label" for="contact-email">{form.emailLabel}</label>
 					<input
 						class="input"
 						id="contact-email"
 						name="email"
 						type="email"
 						autocomplete="email"
-						placeholder={copy.contact.form.emailPlaceholder}
+						aria-describedby="contact-email-error"
+						placeholder={form.emailPlaceholder}
 					/>
+					<p class="field-error" id="contact-email-error" hidden></p>
 				</div>
 			</div>
 			<div class="field fade-up">
-				<label class="field-label" for="contact-message">{copy.contact.form.messageLabel}</label>
+				<label class="field-label" for="contact-message">{form.messageLabel}</label>
 				<textarea
 					class="text-area"
 					id="contact-message"
-					name="message"
-					placeholder={copy.contact.form.messagePlaceholder}
+					name="mensagem"
+					aria-required="true"
+					aria-describedby="contact-message-error"
+					placeholder={form.messagePlaceholder}
 				></textarea>
+				<p class="field-error" id="contact-message-error" hidden></p>
 			</div>
 			<div class="row close-actions fade-up">
 				<Button type="submit">{copy.contact.cta}</Button>
 			</div>
+			<p class="contact-form-status" data-contact-status role="status" aria-live="polite" hidden></p>
 		</form>
 		<nav class="row close-channels fade-up" aria-label={copy.contact.channelsAria}>
 			{
@@ -70,6 +92,7 @@ const { copy } = Astro.props;
 						href={channel.href}
 						target={channel.external ? '_blank' : undefined}
 						rel={channel.external ? 'noopener noreferrer' : undefined}
+						data-track={`social_${channel.id}`}
 					>
 						[ {channel.label} ]
 					</a>

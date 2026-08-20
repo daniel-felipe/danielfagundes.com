@@ -1,4 +1,6 @@
 import { initNavMenu } from './menu';
+import { initAnalytics } from './analytics';
+import { initContactForm } from './contact';
 
 const REVEAL_SEL = '.fade-up, .fade-in, .perspective-load, .scale-in, .line-draw';
 
@@ -217,14 +219,6 @@ function copyTokens() {
 	});
 }
 
-function holdStaticForms() {
-	document.querySelectorAll<HTMLFormElement>('form[data-static]').forEach((form) => {
-		form.addEventListener('submit', (event) => {
-			event.preventDefault();
-		});
-	});
-}
-
 function dismissBanner() {
 	const banner = document.querySelector('.wrapper-sticky-button');
 	const close = document.querySelector('.wrapper-close');
@@ -332,7 +326,8 @@ export function initHome(): void {
 	initNavMenu();
 	accordion();
 	copyTokens();
-	holdStaticForms();
 	dismissBanner();
 	navCurrent();
+	initAnalytics();
+	initContactForm();
 }
