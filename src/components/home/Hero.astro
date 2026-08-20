@@ -29,8 +29,12 @@ const { copy } = Astro.props;
 				</p>
 			</div>
 			<div class="row hero-actions fade-up">
-				<Button href="#contato">{copy.hero.contactCta}</Button>
-				<Button variant="secondary" href={copy.github} external>{copy.hero.githubCta}</Button>
+				<Button href="#contato" data-track="contact_cta" data-track-location="hero">
+					{copy.hero.contactCta}
+				</Button>
+				<Button variant="secondary" href={copy.github} external data-track="github_cta">
+					{copy.hero.githubCta}
+				</Button>
 			</div>
 		</div>
 	</div>

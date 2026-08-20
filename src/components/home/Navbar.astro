@@ -32,7 +32,9 @@ const enHref = getRelativeLocaleUrl('en');
 					<span aria-hidden="true">/</span>
 					<a href={enHref} aria-current={locale === 'en' ? 'true' : undefined}>EN</a>
 				</div>
-				<Button href="#contato">{copy.hero.contactCta}</Button>
+				<Button href="#contato" data-track="contact_cta" data-track-location="nav">
+					{copy.hero.contactCta}
+				</Button>
 			</div>
 		</nav>
 		<div class="row tight">
