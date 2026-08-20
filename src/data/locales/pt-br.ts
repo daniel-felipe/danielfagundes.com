@@ -147,10 +147,15 @@ export const ptBr: HomeCopy = {
 		form: {
 			nameLabel: 'Nome',
 			namePlaceholder: 'Seu nome completo',
+			nameRequired: 'Informe seu nome.',
 			emailLabel: 'E-mail',
 			emailPlaceholder: 'voce@dominio.com',
+			emailInvalid: 'Informe um e-mail válido.',
 			messageLabel: 'Mensagem',
 			messagePlaceholder: 'Conte um pouco sobre o projeto',
+			messageRequired: 'Escreva uma mensagem.',
+			sending: 'Enviando...',
+			networkError: 'Não foi possível enviar. Tente de novo em instantes.',
 		},
 		name: 'Daniel Fagundes',
 		backToTop: 'Voltar ao topo',
@@ -158,17 +163,19 @@ export const ptBr: HomeCopy = {
 		copied: 'copiado',
 		channels: [
 			{
+				id: 'linkedin',
 				label: 'LinkedIn',
 				href: 'https://www.linkedin.com/in/daniel-felipe-fagundes',
 				external: true,
 			},
-			{ label: 'GitHub', href: 'https://github.com/daniel-felipe', external: true },
+			{ id: 'github', label: 'GitHub', href: 'https://github.com/daniel-felipe', external: true },
 			{
+				id: 'instagram',
 				label: 'Instagram',
 				href: 'https://www.instagram.com/danielfagundes.dev',
 				external: true,
 			},
-			{ label: 'E-mail', href: 'mailto:contato@danielfagundes.com' },
+			{ id: 'email', label: 'E-mail', href: 'mailto:contato@danielfagundes.com' },
 		],
 	},
 };

@@ -38,6 +38,7 @@ export interface FaqItem {
 }
 
 export interface Channel {
+	id: 'linkedin' | 'github' | 'instagram' | 'email';
 	label: string;
 	href: string;
 	external?: boolean;
@@ -101,10 +102,15 @@ export interface HomeCopy {
 		form: {
 			nameLabel: string;
 			namePlaceholder: string;
+			nameRequired: string;
 			emailLabel: string;
 			emailPlaceholder: string;
+			emailInvalid: string;
 			messageLabel: string;
 			messagePlaceholder: string;
+			messageRequired: string;
+			sending: string;
+			networkError: string;
 		};
 		name: string;
 		backToTop: string;
