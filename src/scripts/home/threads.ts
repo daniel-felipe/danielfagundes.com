@@ -20,7 +20,7 @@ function fragmentShader(lineCount: number, yMin: number, yMax: number, cheap: bo
   )`;
 
 	return `
-precision mediump float;
+precision ${cheap ? 'mediump' : 'highp'} float;
 
 uniform float iTime;
 uniform vec3 iResolution;
@@ -128,9 +128,10 @@ export function initHeroThreads(): void {
 	if (!hero || !host) return;
 
 	const compact = window.matchMedia('(max-width: 767px), (pointer: coarse)').matches;
-	const lineCount = compact ? 8 : 12;
-	const maxDim = compact ? 480 : 720;
-	const frameMs = 1000 / 20;
+	const lineCount = compact ? 10 : 18;
+	const maxDim = compact ? 960 : 2048;
+	const dprCap = compact ? 1.5 : 2;
+	const frameMs = compact ? 1000 / 24 : 1000 / 30;
 	const followMouse = window.matchMedia('(pointer: fine)').matches;
 	const yMin = compact ? 0.48 : 0.16;
 	const yMax = 0.99;
@@ -142,11 +143,11 @@ export function initHeroThreads(): void {
 	try {
 		renderer = new Renderer({
 			canvas,
-			dpr: 1,
+			dpr: Math.min(window.devicePixelRatio || 1, dprCap),
 			alpha: true,
 			depth: false,
 			antialias: false,
-			powerPreference: 'low-power',
+			powerPreference: compact ? 'low-power' : 'default',
 		});
 	} catch {
 		canvas.remove();
@@ -167,7 +168,7 @@ export function initHeroThreads(): void {
 	const geometry = new Triangle(gl);
 	const program = new Program(gl, {
 		vertex: vertexShader,
-		fragment: fragmentShader(lineCount, yMin, yMax, true),
+		fragment: fragmentShader(lineCount, yMin, yMax, compact),
 		transparent: true,
 		depthTest: false,
 		depthWrite: false,
@@ -198,7 +199,9 @@ export function initHeroThreads(): void {
 		const h = host.clientHeight;
 		if (w < 2 || h < 2) return;
 		const longest = Math.max(w, h);
-		renderer.dpr = longest > maxDim ? maxDim / longest : 1;
+		const dpr = Math.min(window.devicePixelRatio || 1, dprCap);
+		const desired = longest * dpr;
+		renderer.dpr = desired > maxDim ? maxDim / longest : dpr;
 		renderer.setSize(w, h);
 		canvas.style.width = '100%';
 		canvas.style.height = '100%';
